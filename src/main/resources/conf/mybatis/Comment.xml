@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.CommentDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="Comment" id="t_commentMap">
+      	<result property="videoId" column="video_id" />
+		<result property="commentId" column="comment_id" />
+		<result property="userId" column="user_id" />
+		<result property="commentContent" column="comment_content" />
+		<result property="site" column="site" />
+		<result property="publishTime" column="publish_time" />
+		<result property="forwardCount" column="forward_count" />
+		<result property="commentCount" column="comment_count" />
+		<result property="likeCount" column="like_count" />
+		<result property="unlikeCount" column="unlike_count" />
+		<result property="publishClient" column="publish_client" />
+		<result property="createTime" column="create_time" />
+  	</resultMap>
+  	<sql id="Comment_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="commentId!=null">
+			 and comment_id=#{commentId,jdbcType=VARCHAR}
+		</if>
+		<if test="userId!=null">
+			 and user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="commentContent!=null">
+			 and comment_content=#{commentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="publishTime!=null">
+			 and publish_time=#{publishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="forwardCount!=null">
+			 and forward_count=#{forwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="commentCount!=null">
+			 and comment_count=#{commentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="likeCount!=null">
+			 and like_count=#{likeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="unlikeCount!=null">
+			 and unlike_count=#{unlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="publishClient!=null">
+			 and publish_client=#{publishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+	</where>
+  </sql>
+  <sql id="CommentSearchBean_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="commentId!=null">
+			 and comment_id=#{commentId,jdbcType=VARCHAR}
+		</if>
+		<if test="userId!=null">
+			 and user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullUserId!=null and isNotNullUserId==true">
+			 and user_id is not null
+		</if>
+		<if test="isNotNullUserId!=null and isNotNullUserId==false">
+			 and user_id is null
+		</if>
+		<if test="inUserId!=null">
+			 and user_id in
+			<foreach collection="list" index="index" item="inUserId" open="(" separator="," close=")">
+				#{inUserId}
+			</foreach>
+		</if>
+		<if test="notInUserId!=null">
+			 and user_id not in
+			<foreach collection="list" index="index" item="notInUserId" open="(" separator="," close=")">
+				#{notInUserId}
+			</foreach>
+		</if>
+		<if test="noEqualsUserId!=null">
+			 and user_id<![CDATA[<>]]>#{noEqualsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUserId!=null">
+			 and user_id=#{equalsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUserId!=null">
+			 and user_id<![CDATA[>]]>#{greaterUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUserId!=null">
+			 and user_id<![CDATA[>=]]>#{greaterEqualsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUserId!=null">
+			 and user_id<![CDATA[<]]>#{lessUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUserId!=null">
+			 and user_id<![CDATA[<=]]>#{lessEqualsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUserId!=null">
+			 and user_id like "%"#{likeUserId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUserId!=null">
+			 and user_id like "%"#{leftLikeUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUserId!=null">
+			 and user_id like #{rightLikeUserId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="commentContent!=null">
+			 and comment_content=#{commentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCommentContent!=null and isNotNullCommentContent==true">
+			 and comment_content is not null
+		</if>
+		<if test="isNotNullCommentContent!=null and isNotNullCommentContent==false">
+			 and comment_content is null
+		</if>
+		<if test="inCommentContent!=null">
+			 and comment_content in
+			<foreach collection="list" index="index" item="inCommentContent" open="(" separator="," close=")">
+				#{inCommentContent}
+			</foreach>
+		</if>
+		<if test="notInCommentContent!=null">
+			 and comment_content not in
+			<foreach collection="list" index="index" item="notInCommentContent" open="(" separator="," close=")">
+				#{notInCommentContent}
+			</foreach>
+		</if>
+		<if test="noEqualsCommentContent!=null">
+			 and comment_content<![CDATA[<>]]>#{noEqualsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCommentContent!=null">
+			 and comment_content=#{equalsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCommentContent!=null">
+			 and comment_content<![CDATA[>]]>#{greaterCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCommentContent!=null">
+			 and comment_content<![CDATA[>=]]>#{greaterEqualsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCommentContent!=null">
+			 and comment_content<![CDATA[<]]>#{lessCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCommentContent!=null">
+			 and comment_content<![CDATA[<=]]>#{lessEqualsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCommentContent!=null">
+			 and comment_content like "%"#{likeCommentContent,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCommentContent!=null">
+			 and comment_content like "%"#{leftLikeCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCommentContent!=null">
+			 and comment_content like #{rightLikeCommentContent,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="publishTime!=null">
+			 and publish_time=#{publishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullPublishTime!=null and isNotNullPublishTime==true">
+			 and publish_time is not null
+		</if>
+		<if test="isNotNullPublishTime!=null and isNotNullPublishTime==false">
+			 and publish_time is null
+		</if>
+		<if test="inPublishTime!=null">
+			 and publish_time in
+			<foreach collection="list" index="index" item="inPublishTime" open="(" separator="," close=")">
+				#{inPublishTime}
+			</foreach>
+		</if>
+		<if test="notInPublishTime!=null">
+			 and publish_time not in
+			<foreach collection="list" index="index" item="notInPublishTime" open="(" separator="," close=")">
+				#{notInPublishTime}
+			</foreach>
+		</if>
+		<if test="noEqualsPublishTime!=null">
+			 and publish_time<![CDATA[<>]]>#{noEqualsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsPublishTime!=null">
+			 and publish_time=#{equalsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterPublishTime!=null">
+			 and publish_time<![CDATA[>]]>#{greaterPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsPublishTime!=null">
+			 and publish_time<![CDATA[>=]]>#{greaterEqualsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessPublishTime!=null">
+			 and publish_time<![CDATA[<]]>#{lessPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsPublishTime!=null">
+			 and publish_time<![CDATA[<=]]>#{lessEqualsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likePublishTime!=null">
+			 and publish_time like "%"#{likePublishTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikePublishTime!=null">
+			 and publish_time like "%"#{leftLikePublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikePublishTime!=null">
+			 and publish_time like #{rightLikePublishTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="forwardCount!=null">
+			 and forward_count=#{forwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullForwardCount!=null and isNotNullForwardCount==true">
+			 and forward_count is not null
+		</if>
+		<if test="isNotNullForwardCount!=null and isNotNullForwardCount==false">
+			 and forward_count is null
+		</if>
+		<if test="inForwardCount!=null">
+			 and forward_count in
+			<foreach collection="list" index="index" item="inForwardCount" open="(" separator="," close=")">
+				#{inForwardCount}
+			</foreach>
+		</if>
+		<if test="notInForwardCount!=null">
+			 and forward_count not in
+			<foreach collection="list" index="index" item="notInForwardCount" open="(" separator="," close=")">
+				#{notInForwardCount}
+			</foreach>
+		</if>
+		<if test="noEqualsForwardCount!=null">
+			 and forward_count<![CDATA[<>]]>#{noEqualsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsForwardCount!=null">
+			 and forward_count=#{equalsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterForwardCount!=null">
+			 and forward_count<![CDATA[>]]>#{greaterForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsForwardCount!=null">
+			 and forward_count<![CDATA[>=]]>#{greaterEqualsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessForwardCount!=null">
+			 and forward_count<![CDATA[<]]>#{lessForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsForwardCount!=null">
+			 and forward_count<![CDATA[<=]]>#{lessEqualsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="commentCount!=null">
+			 and comment_count=#{commentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==true">
+			 and comment_count is not null
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==false">
+			 and comment_count is null
+		</if>
+		<if test="inCommentCount!=null">
+			 and comment_count in
+			<foreach collection="list" index="index" item="inCommentCount" open="(" separator="," close=")">
+				#{inCommentCount}
+			</foreach>
+		</if>
+		<if test="notInCommentCount!=null">
+			 and comment_count not in
+			<foreach collection="list" index="index" item="notInCommentCount" open="(" separator="," close=")">
+				#{notInCommentCount}
+			</foreach>
+		</if>
+		<if test="noEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<>]]>#{noEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsCommentCount!=null">
+			 and comment_count=#{equalsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterCommentCount!=null">
+			 and comment_count<![CDATA[>]]>#{greaterCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsCommentCount!=null">
+			 and comment_count<![CDATA[>=]]>#{greaterEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessCommentCount!=null">
+			 and comment_count<![CDATA[<]]>#{lessCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<=]]>#{lessEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="likeCount!=null">
+			 and like_count=#{likeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullLikeCount!=null and isNotNullLikeCount==true">
+			 and like_count is not null
+		</if>
+		<if test="isNotNullLikeCount!=null and isNotNullLikeCount==false">
+			 and like_count is null
+		</if>
+		<if test="inLikeCount!=null">
+			 and like_count in
+			<foreach collection="list" index="index" item="inLikeCount" open="(" separator="," close=")">
+				#{inLikeCount}
+			</foreach>
+		</if>
+		<if test="notInLikeCount!=null">
+			 and like_count not in
+			<foreach collection="list" index="index" item="notInLikeCount" open="(" separator="," close=")">
+				#{notInLikeCount}
+			</foreach>
+		</if>
+		<if test="noEqualsLikeCount!=null">
+			 and like_count<![CDATA[<>]]>#{noEqualsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsLikeCount!=null">
+			 and like_count=#{equalsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterLikeCount!=null">
+			 and like_count<![CDATA[>]]>#{greaterLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsLikeCount!=null">
+			 and like_count<![CDATA[>=]]>#{greaterEqualsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessLikeCount!=null">
+			 and like_count<![CDATA[<]]>#{lessLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsLikeCount!=null">
+			 and like_count<![CDATA[<=]]>#{lessEqualsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="unlikeCount!=null">
+			 and unlike_count=#{unlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullUnlikeCount!=null and isNotNullUnlikeCount==true">
+			 and unlike_count is not null
+		</if>
+		<if test="isNotNullUnlikeCount!=null and isNotNullUnlikeCount==false">
+			 and unlike_count is null
+		</if>
+		<if test="inUnlikeCount!=null">
+			 and unlike_count in
+			<foreach collection="list" index="index" item="inUnlikeCount" open="(" separator="," close=")">
+				#{inUnlikeCount}
+			</foreach>
+		</if>
+		<if test="notInUnlikeCount!=null">
+			 and unlike_count not in
+			<foreach collection="list" index="index" item="notInUnlikeCount" open="(" separator="," close=")">
+				#{notInUnlikeCount}
+			</foreach>
+		</if>
+		<if test="noEqualsUnlikeCount!=null">
+			 and unlike_count<![CDATA[<>]]>#{noEqualsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsUnlikeCount!=null">
+			 and unlike_count=#{equalsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterUnlikeCount!=null">
+			 and unlike_count<![CDATA[>]]>#{greaterUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsUnlikeCount!=null">
+			 and unlike_count<![CDATA[>=]]>#{greaterEqualsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessUnlikeCount!=null">
+			 and unlike_count<![CDATA[<]]>#{lessUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsUnlikeCount!=null">
+			 and unlike_count<![CDATA[<=]]>#{lessEqualsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="publishClient!=null">
+			 and publish_client=#{publishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullPublishClient!=null and isNotNullPublishClient==true">
+			 and publish_client is not null
+		</if>
+		<if test="isNotNullPublishClient!=null and isNotNullPublishClient==false">
+			 and publish_client is null
+		</if>
+		<if test="inPublishClient!=null">
+			 and publish_client in
+			<foreach collection="list" index="index" item="inPublishClient" open="(" separator="," close=")">
+				#{inPublishClient}
+			</foreach>
+		</if>
+		<if test="notInPublishClient!=null">
+			 and publish_client not in
+			<foreach collection="list" index="index" item="notInPublishClient" open="(" separator="," close=")">
+				#{notInPublishClient}
+			</foreach>
+		</if>
+		<if test="noEqualsPublishClient!=null">
+			 and publish_client<![CDATA[<>]]>#{noEqualsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPublishClient!=null">
+			 and publish_client=#{equalsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPublishClient!=null">
+			 and publish_client<![CDATA[>]]>#{greaterPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPublishClient!=null">
+			 and publish_client<![CDATA[>=]]>#{greaterEqualsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPublishClient!=null">
+			 and publish_client<![CDATA[<]]>#{lessPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPublishClient!=null">
+			 and publish_client<![CDATA[<=]]>#{lessEqualsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==true">
+			 and create_time is not null
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==false">
+			 and create_time is null
+		</if>
+		<if test="inCreateTime!=null">
+			 and create_time in
+			<foreach collection="list" index="index" item="inCreateTime" open="(" separator="," close=")">
+				#{inCreateTime}
+			</foreach>
+		</if>
+		<if test="notInCreateTime!=null">
+			 and create_time not in
+			<foreach collection="list" index="index" item="notInCreateTime" open="(" separator="," close=")">
+				#{notInCreateTime}
+			</foreach>
+		</if>
+		<if test="noEqualsCreateTime!=null">
+			 and create_time<![CDATA[<>]]>#{noEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCreateTime!=null">
+			 and create_time=#{equalsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCreateTime!=null">
+			 and create_time<![CDATA[>]]>#{greaterCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCreateTime!=null">
+			 and create_time<![CDATA[>=]]>#{greaterEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCreateTime!=null">
+			 and create_time<![CDATA[<]]>#{lessCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCreateTime!=null">
+			 and create_time<![CDATA[<=]]>#{lessEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCreateTime!=null">
+			 and create_time like "%"#{likeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCreateTime!=null">
+			 and create_time like "%"#{leftLikeCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCreateTime!=null">
+			 and create_time like #{rightLikeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="CommentCondition_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="commentId!=null">
+			 and comment_id=#{commentId,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullUserId!=null and isNotNullUserId==true">
+			 and user_id is not null
+		</if>
+		<if test="isNotNullUserId!=null and isNotNullUserId==false">
+			 and user_id is null
+		</if>
+		<if test="inUserId!=null">
+			 and user_id in
+			<foreach collection="list" index="index" item="inUserId" open="(" separator="," close=")">
+				#{inUserId}
+			</foreach>
+		</if>
+		<if test="notInUserId!=null">
+			 and user_id not in
+			<foreach collection="list" index="index" item="notInUserId" open="(" separator="," close=")">
+				#{notInUserId}
+			</foreach>
+		</if>
+		<if test="noEqualsUserId!=null">
+			 and user_id<![CDATA[<>]]>#{noEqualsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUserId!=null">
+			 and user_id=#{equalsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUserId!=null">
+			 and user_id<![CDATA[>]]>#{greaterUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUserId!=null">
+			 and user_id<![CDATA[>=]]>#{greaterEqualsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUserId!=null">
+			 and user_id<![CDATA[<]]>#{lessUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUserId!=null">
+			 and user_id<![CDATA[<=]]>#{lessEqualsUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUserId!=null">
+			 and user_id like "%"#{likeUserId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUserId!=null">
+			 and user_id like "%"#{leftLikeUserId,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUserId!=null">
+			 and user_id like #{rightLikeUserId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCommentContent!=null and isNotNullCommentContent==true">
+			 and comment_content is not null
+		</if>
+		<if test="isNotNullCommentContent!=null and isNotNullCommentContent==false">
+			 and comment_content is null
+		</if>
+		<if test="inCommentContent!=null">
+			 and comment_content in
+			<foreach collection="list" index="index" item="inCommentContent" open="(" separator="," close=")">
+				#{inCommentContent}
+			</foreach>
+		</if>
+		<if test="notInCommentContent!=null">
+			 and comment_content not in
+			<foreach collection="list" index="index" item="notInCommentContent" open="(" separator="," close=")">
+				#{notInCommentContent}
+			</foreach>
+		</if>
+		<if test="noEqualsCommentContent!=null">
+			 and comment_content<![CDATA[<>]]>#{noEqualsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCommentContent!=null">
+			 and comment_content=#{equalsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCommentContent!=null">
+			 and comment_content<![CDATA[>]]>#{greaterCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCommentContent!=null">
+			 and comment_content<![CDATA[>=]]>#{greaterEqualsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCommentContent!=null">
+			 and comment_content<![CDATA[<]]>#{lessCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCommentContent!=null">
+			 and comment_content<![CDATA[<=]]>#{lessEqualsCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCommentContent!=null">
+			 and comment_content like "%"#{likeCommentContent,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCommentContent!=null">
+			 and comment_content like "%"#{leftLikeCommentContent,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCommentContent!=null">
+			 and comment_content like #{rightLikeCommentContent,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullPublishTime!=null and isNotNullPublishTime==true">
+			 and publish_time is not null
+		</if>
+		<if test="isNotNullPublishTime!=null and isNotNullPublishTime==false">
+			 and publish_time is null
+		</if>
+		<if test="inPublishTime!=null">
+			 and publish_time in
+			<foreach collection="list" index="index" item="inPublishTime" open="(" separator="," close=")">
+				#{inPublishTime}
+			</foreach>
+		</if>
+		<if test="notInPublishTime!=null">
+			 and publish_time not in
+			<foreach collection="list" index="index" item="notInPublishTime" open="(" separator="," close=")">
+				#{notInPublishTime}
+			</foreach>
+		</if>
+		<if test="noEqualsPublishTime!=null">
+			 and publish_time<![CDATA[<>]]>#{noEqualsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsPublishTime!=null">
+			 and publish_time=#{equalsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterPublishTime!=null">
+			 and publish_time<![CDATA[>]]>#{greaterPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsPublishTime!=null">
+			 and publish_time<![CDATA[>=]]>#{greaterEqualsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessPublishTime!=null">
+			 and publish_time<![CDATA[<]]>#{lessPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsPublishTime!=null">
+			 and publish_time<![CDATA[<=]]>#{lessEqualsPublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likePublishTime!=null">
+			 and publish_time like "%"#{likePublishTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikePublishTime!=null">
+			 and publish_time like "%"#{leftLikePublishTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikePublishTime!=null">
+			 and publish_time like #{rightLikePublishTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullForwardCount!=null and isNotNullForwardCount==true">
+			 and forward_count is not null
+		</if>
+		<if test="isNotNullForwardCount!=null and isNotNullForwardCount==false">
+			 and forward_count is null
+		</if>
+		<if test="inForwardCount!=null">
+			 and forward_count in
+			<foreach collection="list" index="index" item="inForwardCount" open="(" separator="," close=")">
+				#{inForwardCount}
+			</foreach>
+		</if>
+		<if test="notInForwardCount!=null">
+			 and forward_count not in
+			<foreach collection="list" index="index" item="notInForwardCount" open="(" separator="," close=")">
+				#{notInForwardCount}
+			</foreach>
+		</if>
+		<if test="noEqualsForwardCount!=null">
+			 and forward_count<![CDATA[<>]]>#{noEqualsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsForwardCount!=null">
+			 and forward_count=#{equalsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterForwardCount!=null">
+			 and forward_count<![CDATA[>]]>#{greaterForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsForwardCount!=null">
+			 and forward_count<![CDATA[>=]]>#{greaterEqualsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessForwardCount!=null">
+			 and forward_count<![CDATA[<]]>#{lessForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsForwardCount!=null">
+			 and forward_count<![CDATA[<=]]>#{lessEqualsForwardCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==true">
+			 and comment_count is not null
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==false">
+			 and comment_count is null
+		</if>
+		<if test="inCommentCount!=null">
+			 and comment_count in
+			<foreach collection="list" index="index" item="inCommentCount" open="(" separator="," close=")">
+				#{inCommentCount}
+			</foreach>
+		</if>
+		<if test="notInCommentCount!=null">
+			 and comment_count not in
+			<foreach collection="list" index="index" item="notInCommentCount" open="(" separator="," close=")">
+				#{notInCommentCount}
+			</foreach>
+		</if>
+		<if test="noEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<>]]>#{noEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsCommentCount!=null">
+			 and comment_count=#{equalsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterCommentCount!=null">
+			 and comment_count<![CDATA[>]]>#{greaterCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsCommentCount!=null">
+			 and comment_count<![CDATA[>=]]>#{greaterEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessCommentCount!=null">
+			 and comment_count<![CDATA[<]]>#{lessCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<=]]>#{lessEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullLikeCount!=null and isNotNullLikeCount==true">
+			 and like_count is not null
+		</if>
+		<if test="isNotNullLikeCount!=null and isNotNullLikeCount==false">
+			 and like_count is null
+		</if>
+		<if test="inLikeCount!=null">
+			 and like_count in
+			<foreach collection="list" index="index" item="inLikeCount" open="(" separator="," close=")">
+				#{inLikeCount}
+			</foreach>
+		</if>
+		<if test="notInLikeCount!=null">
+			 and like_count not in
+			<foreach collection="list" index="index" item="notInLikeCount" open="(" separator="," close=")">
+				#{notInLikeCount}
+			</foreach>
+		</if>
+		<if test="noEqualsLikeCount!=null">
+			 and like_count<![CDATA[<>]]>#{noEqualsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsLikeCount!=null">
+			 and like_count=#{equalsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterLikeCount!=null">
+			 and like_count<![CDATA[>]]>#{greaterLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsLikeCount!=null">
+			 and like_count<![CDATA[>=]]>#{greaterEqualsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessLikeCount!=null">
+			 and like_count<![CDATA[<]]>#{lessLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsLikeCount!=null">
+			 and like_count<![CDATA[<=]]>#{lessEqualsLikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullUnlikeCount!=null and isNotNullUnlikeCount==true">
+			 and unlike_count is not null
+		</if>
+		<if test="isNotNullUnlikeCount!=null and isNotNullUnlikeCount==false">
+			 and unlike_count is null
+		</if>
+		<if test="inUnlikeCount!=null">
+			 and unlike_count in
+			<foreach collection="list" index="index" item="inUnlikeCount" open="(" separator="," close=")">
+				#{inUnlikeCount}
+			</foreach>
+		</if>
+		<if test="notInUnlikeCount!=null">
+			 and unlike_count not in
+			<foreach collection="list" index="index" item="notInUnlikeCount" open="(" separator="," close=")">
+				#{notInUnlikeCount}
+			</foreach>
+		</if>
+		<if test="noEqualsUnlikeCount!=null">
+			 and unlike_count<![CDATA[<>]]>#{noEqualsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsUnlikeCount!=null">
+			 and unlike_count=#{equalsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterUnlikeCount!=null">
+			 and unlike_count<![CDATA[>]]>#{greaterUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsUnlikeCount!=null">
+			 and unlike_count<![CDATA[>=]]>#{greaterEqualsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessUnlikeCount!=null">
+			 and unlike_count<![CDATA[<]]>#{lessUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsUnlikeCount!=null">
+			 and unlike_count<![CDATA[<=]]>#{lessEqualsUnlikeCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullPublishClient!=null and isNotNullPublishClient==true">
+			 and publish_client is not null
+		</if>
+		<if test="isNotNullPublishClient!=null and isNotNullPublishClient==false">
+			 and publish_client is null
+		</if>
+		<if test="inPublishClient!=null">
+			 and publish_client in
+			<foreach collection="list" index="index" item="inPublishClient" open="(" separator="," close=")">
+				#{inPublishClient}
+			</foreach>
+		</if>
+		<if test="notInPublishClient!=null">
+			 and publish_client not in
+			<foreach collection="list" index="index" item="notInPublishClient" open="(" separator="," close=")">
+				#{notInPublishClient}
+			</foreach>
+		</if>
+		<if test="noEqualsPublishClient!=null">
+			 and publish_client<![CDATA[<>]]>#{noEqualsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPublishClient!=null">
+			 and publish_client=#{equalsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPublishClient!=null">
+			 and publish_client<![CDATA[>]]>#{greaterPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPublishClient!=null">
+			 and publish_client<![CDATA[>=]]>#{greaterEqualsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPublishClient!=null">
+			 and publish_client<![CDATA[<]]>#{lessPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPublishClient!=null">
+			 and publish_client<![CDATA[<=]]>#{lessEqualsPublishClient,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==true">
+			 and create_time is not null
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==false">
+			 and create_time is null
+		</if>
+		<if test="inCreateTime!=null">
+			 and create_time in
+			<foreach collection="list" index="index" item="inCreateTime" open="(" separator="," close=")">
+				#{inCreateTime}
+			</foreach>
+		</if>
+		<if test="notInCreateTime!=null">
+			 and create_time not in
+			<foreach collection="list" index="index" item="notInCreateTime" open="(" separator="," close=")">
+				#{notInCreateTime}
+			</foreach>
+		</if>
+		<if test="noEqualsCreateTime!=null">
+			 and create_time<![CDATA[<>]]>#{noEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCreateTime!=null">
+			 and create_time=#{equalsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCreateTime!=null">
+			 and create_time<![CDATA[>]]>#{greaterCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCreateTime!=null">
+			 and create_time<![CDATA[>=]]>#{greaterEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCreateTime!=null">
+			 and create_time<![CDATA[<]]>#{lessCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCreateTime!=null">
+			 and create_time<![CDATA[<=]]>#{lessEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCreateTime!=null">
+			 and create_time like "%"#{likeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCreateTime!=null">
+			 and create_time like "%"#{leftLikeCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCreateTime!=null">
+			 and create_time like #{rightLikeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="Comment_UPDATE">
+	<set>
+		<if test="videoId!=null">
+			video_id=#{videoId,jdbcType=VARCHAR},
+		</if>
+		<if test="commentId!=null">
+			comment_id=#{commentId,jdbcType=VARCHAR},
+		</if>
+		<if test="userId!=null">
+			user_id=#{userId,jdbcType=VARCHAR},
+		</if>
+		<if test="commentContent!=null">
+			comment_content=#{commentContent,jdbcType=VARCHAR},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+		<if test="publishTime!=null">
+			publish_time=#{publishTime,jdbcType=VARCHAR},
+		</if>
+		<if test="forwardCount!=null">
+			forward_count=#{forwardCount,jdbcType=NUMERIC},
+		</if>
+		<if test="commentCount!=null">
+			comment_count=#{commentCount,jdbcType=NUMERIC},
+		</if>
+		<if test="likeCount!=null">
+			like_count=#{likeCount,jdbcType=NUMERIC},
+		</if>
+		<if test="unlikeCount!=null">
+			unlike_count=#{unlikeCount,jdbcType=NUMERIC},
+		</if>
+		<if test="publishClient!=null">
+			publish_client=#{publishClient,jdbcType=NUMERIC},
+		</if>
+		<if test="createTime!=null">
+			create_time=#{createTime,jdbcType=VARCHAR},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertComment" parameterType="Comment" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_comment (video_id,comment_id,user_id,comment_content,site,publish_time,forward_count,comment_count,like_count,unlike_count,publish_client,create_time) VALUES (#{videoId},#{commentId},#{userId},#{commentContent},#{site},#{publishTime},#{forwardCount},#{commentCount},#{likeCount},#{unlikeCount},#{publishClient},#{createTime})
+		]]>
+    </insert>
+    <update id="update_Comment" parameterType="Comment" flushCache="true">
+    	<![CDATA[UPDATE t_comment SET video_id=#{videoId,jdbcType=VARCHAR},,comment_id=#{commentId,jdbcType=VARCHAR},,user_id=#{userId,jdbcType=VARCHAR},,comment_content=#{commentContent,jdbcType=VARCHAR},,site=#{site,jdbcType=NUMERIC},,publish_time=#{publishTime,jdbcType=VARCHAR},,forward_count=#{forwardCount,jdbcType=NUMERIC},,comment_count=#{commentCount,jdbcType=NUMERIC},,like_count=#{likeCount,jdbcType=NUMERIC},,unlike_count=#{unlikeCount,jdbcType=NUMERIC},,publish_client=#{publishClient,jdbcType=NUMERIC},,create_time=#{createTime,jdbcType=VARCHAR}, WHERE video_id=#{videoId,jdbcType=VARCHAR} AND comment_id=#{commentId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+    <update id="updateCommentByExample" parameterType="Comment" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_comment
+    	]]>
+    	<include refid="Comment_UPDATE" />
+    	<![CDATA[WHERE video_id=#{videoId,jdbcType=VARCHAR} AND comment_id=#{commentId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+  	<update id="updateCommentByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_comment ${value}
+    	]]>
+  	</update>
+  	<update id="updateCommentByCondition" parameterType="cn.com.paladintyrion.client.search.CommentSearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_comment]]>
+    	<include refid="Comment_UPDATE" />
+    	<include refid="CommentCondition_WHERE" />
+  	</update>
+  	<delete id="deleteCommentByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_comment ${value}]]>
+  	</delete>
+  	<delete id="deleteCommentByExample" parameterType="Comment" flushCache="true">
+    	<![CDATA[DELETE FROM t_comment]]>
+    	<include refid="Comment_WHERE" />
+  	</delete>
+  	<delete id="deleteCommentByCondition" parameterType="cn.com.paladintyrion.client.search.CommentSearchBean" flushCache="true">
+    	<![CDATA[delete from t_comment]]>
+    	<include refid="CommentSearchBean_WHERE" />
+  	</delete>
+  	<select id="getCommentByWhere" parameterType="java.lang.String" resultType="Comment" resultMap="t_commentMap">
+    	<![CDATA[SELECT * FROM t_comment ${value}]]>
+  	</select>
+  	<select id="getCommentByExample" parameterType="Comment" resultType="Comment" resultMap="t_commentMap">  
+        <![CDATA[
+			SELECT * FROM t_comment
+		]]>
+        <include refid="Comment_WHERE" />
+    </select>
+    <select id="getCommentByCondition" parameterType="cn.com.paladintyrion.client.search.CommentSearchBean" resultType="Comment" resultMap="t_commentMap">
+    	<![CDATA[SELECT * FROM t_comment]]>
+    	<include refid="CommentSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCommentListByWhere" parameterType="java.lang.String" resultType="Comment" resultMap="t_commentMap">
+    	<![CDATA[SELECT * FROM t_comment ${sql}]]>
+  	</select>
+  	<select id="getCommentListByCondition" parameterType="cn.com.paladintyrion.client.search.CommentSearchBean" resultType="Comment" resultMap="t_commentMap">
+    	<![CDATA[SELECT * FROM t_comment]]>
+    	<include refid="CommentSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCommentCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_comment ${value}]]>
+  	</select>
+  	<select id="getCommentCountByExample" parameterType="Comment" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_comment]]>
+    	<include refid="Comment_WHERE" />
+  	</select>
+  	<select id="getCommentCountByCondition" parameterType="cn.com.paladintyrion.client.search.CommentSearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_comment]]>
+    	<include refid="CommentSearchBean_WHERE" />
+  	</select>
+  	<select id="getCommentColumnByWhere" parameterType="cn.com.paladintyrion.client.search.CommentSearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT $columnSql$ FROM t_comment]]>
+    	<include refid="CommentSearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

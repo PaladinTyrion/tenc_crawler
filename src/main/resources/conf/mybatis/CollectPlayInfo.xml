@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.CollectPlayInfoDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="CollectPlayInfo" id="t_collect_play_infoMap">
+      	<result property="collectId" column="collect_id" />
+		<result property="provinceCode" column="province_code" />
+		<result property="playCount" column="play_count" />
+		<result property="site" column="site" />
+  	</resultMap>
+  	<sql id="CollectPlayInfo_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceCode!=null">
+			 and province_code=#{provinceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="playCount!=null">
+			 and play_count=#{playCount,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectPlayInfoSearchBean_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceCode!=null">
+			 and province_code=#{provinceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="playCount!=null">
+			 and play_count=#{playCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==true">
+			 and play_count is not null
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==false">
+			 and play_count is null
+		</if>
+		<if test="inPlayCount!=null">
+			 and play_count in
+			<foreach collection="list" index="index" item="inPlayCount" open="(" separator="," close=")">
+				#{inPlayCount}
+			</foreach>
+		</if>
+		<if test="notInPlayCount!=null">
+			 and play_count not in
+			<foreach collection="list" index="index" item="notInPlayCount" open="(" separator="," close=")">
+				#{notInPlayCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPlayCount!=null">
+			 and play_count<![CDATA[<>]]>#{noEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPlayCount!=null">
+			 and play_count=#{equalsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPlayCount!=null">
+			 and play_count<![CDATA[>]]>#{greaterPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPlayCount!=null">
+			 and play_count<![CDATA[>=]]>#{greaterEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPlayCount!=null">
+			 and play_count<![CDATA[<]]>#{lessPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPlayCount!=null">
+			 and play_count<![CDATA[<=]]>#{lessEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectPlayInfoCondition_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceCode!=null">
+			 and province_code=#{provinceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==true">
+			 and play_count is not null
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==false">
+			 and play_count is null
+		</if>
+		<if test="inPlayCount!=null">
+			 and play_count in
+			<foreach collection="list" index="index" item="inPlayCount" open="(" separator="," close=")">
+				#{inPlayCount}
+			</foreach>
+		</if>
+		<if test="notInPlayCount!=null">
+			 and play_count not in
+			<foreach collection="list" index="index" item="notInPlayCount" open="(" separator="," close=")">
+				#{notInPlayCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPlayCount!=null">
+			 and play_count<![CDATA[<>]]>#{noEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPlayCount!=null">
+			 and play_count=#{equalsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPlayCount!=null">
+			 and play_count<![CDATA[>]]>#{greaterPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPlayCount!=null">
+			 and play_count<![CDATA[>=]]>#{greaterEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPlayCount!=null">
+			 and play_count<![CDATA[<]]>#{lessPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPlayCount!=null">
+			 and play_count<![CDATA[<=]]>#{lessEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectPlayInfo_UPDATE">
+	<set>
+		<if test="collectId!=null">
+			collect_id=#{collectId,jdbcType=VARCHAR},
+		</if>
+		<if test="provinceCode!=null">
+			province_code=#{provinceCode,jdbcType=VARCHAR},
+		</if>
+		<if test="playCount!=null">
+			play_count=#{playCount,jdbcType=NUMERIC},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertCollectPlayInfo" parameterType="CollectPlayInfo" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_collect_play_info (collect_id,province_code,play_count,site) VALUES (#{collectId},#{provinceCode},#{playCount},#{site})
+		]]>
+    </insert>
+    <update id="update_CollectPlayInfo" parameterType="CollectPlayInfo" flushCache="true">
+    	<![CDATA[UPDATE t_collect_play_info SET collect_id=#{collectId,jdbcType=VARCHAR},,province_code=#{provinceCode,jdbcType=VARCHAR},,play_count=#{playCount,jdbcType=NUMERIC},,site=#{site,jdbcType=NUMERIC}, WHERE collect_id=#{collectId,jdbcType=VARCHAR} AND province_code=#{provinceCode,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+    <update id="updateCollectPlayInfoByExample" parameterType="CollectPlayInfo" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_collect_play_info
+    	]]>
+    	<include refid="CollectPlayInfo_UPDATE" />
+    	<![CDATA[WHERE collect_id=#{collectId,jdbcType=VARCHAR} AND province_code=#{provinceCode,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+  	<update id="updateCollectPlayInfoByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_collect_play_info ${value}
+    	]]>
+  	</update>
+  	<update id="updateCollectPlayInfoByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPlayInfoSearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_collect_play_info]]>
+    	<include refid="CollectPlayInfo_UPDATE" />
+    	<include refid="CollectPlayInfoCondition_WHERE" />
+  	</update>
+  	<delete id="deleteCollectPlayInfoByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_collect_play_info ${value}]]>
+  	</delete>
+  	<delete id="deleteCollectPlayInfoByExample" parameterType="CollectPlayInfo" flushCache="true">
+    	<![CDATA[DELETE FROM t_collect_play_info]]>
+    	<include refid="CollectPlayInfo_WHERE" />
+  	</delete>
+  	<delete id="deleteCollectPlayInfoByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPlayInfoSearchBean" flushCache="true">
+    	<![CDATA[delete from t_collect_play_info]]>
+    	<include refid="CollectPlayInfoSearchBean_WHERE" />
+  	</delete>
+  	<select id="getCollectPlayInfoByWhere" parameterType="java.lang.String" resultType="CollectPlayInfo" resultMap="t_collect_play_infoMap">
+    	<![CDATA[SELECT * FROM t_collect_play_info ${value}]]>
+  	</select>
+  	<select id="getCollectPlayInfoByExample" parameterType="CollectPlayInfo" resultType="CollectPlayInfo" resultMap="t_collect_play_infoMap">  
+        <![CDATA[
+			SELECT * FROM t_collect_play_info
+		]]>
+        <include refid="CollectPlayInfo_WHERE" />
+    </select>
+    <select id="getCollectPlayInfoByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPlayInfoSearchBean" resultType="CollectPlayInfo" resultMap="t_collect_play_infoMap">
+    	<![CDATA[SELECT * FROM t_collect_play_info]]>
+    	<include refid="CollectPlayInfoSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCollectPlayInfoListByWhere" parameterType="java.lang.String" resultType="CollectPlayInfo" resultMap="t_collect_play_infoMap">
+    	<![CDATA[SELECT * FROM t_collect_play_info ${sql}]]>
+  	</select>
+  	<select id="getCollectPlayInfoListByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPlayInfoSearchBean" resultType="CollectPlayInfo" resultMap="t_collect_play_infoMap">
+    	<![CDATA[SELECT * FROM t_collect_play_info]]>
+    	<include refid="CollectPlayInfoSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCollectPlayInfoCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_play_info ${value}]]>
+  	</select>
+  	<select id="getCollectPlayInfoCountByExample" parameterType="CollectPlayInfo" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_play_info]]>
+    	<include refid="CollectPlayInfo_WHERE" />
+  	</select>
+  	<select id="getCollectPlayInfoCountByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPlayInfoSearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_play_info]]>
+    	<include refid="CollectPlayInfoSearchBean_WHERE" />
+  	</select>
+  	<select id="getCollectPlayInfoColumnByWhere" parameterType="cn.com.paladintyrion.client.search.CollectPlayInfoSearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT $columnSql$ FROM t_collect_play_info]]>
+    	<include refid="CollectPlayInfoSearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

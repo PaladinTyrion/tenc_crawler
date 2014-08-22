@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.VideoPropertyDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="VideoProperty" id="t_video_propertyMap">
+      	<result property="videoId" column="video_id" />
+		<result property="playCount" column="play_count" />
+		<result property="upCount" column="up_count" />
+		<result property="downCount" column="down_count" />
+		<result property="commentCount" column="comment_count" />
+		<result property="site" column="site" />
+		<result property="createTime" column="create_time" />
+  	</resultMap>
+  	<sql id="VideoProperty_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="playCount!=null">
+			 and play_count=#{playCount,jdbcType=NUMERIC}
+		</if>
+		<if test="upCount!=null">
+			 and up_count=#{upCount,jdbcType=NUMERIC}
+		</if>
+		<if test="downCount!=null">
+			 and down_count=#{downCount,jdbcType=NUMERIC}
+		</if>
+		<if test="commentCount!=null">
+			 and comment_count=#{commentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoPropertySearchBean_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="playCount!=null">
+			 and play_count=#{playCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==true">
+			 and play_count is not null
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==false">
+			 and play_count is null
+		</if>
+		<if test="inPlayCount!=null">
+			 and play_count in
+			<foreach collection="list" index="index" item="inPlayCount" open="(" separator="," close=")">
+				#{inPlayCount}
+			</foreach>
+		</if>
+		<if test="notInPlayCount!=null">
+			 and play_count not in
+			<foreach collection="list" index="index" item="notInPlayCount" open="(" separator="," close=")">
+				#{notInPlayCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPlayCount!=null">
+			 and play_count<![CDATA[<>]]>#{noEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPlayCount!=null">
+			 and play_count=#{equalsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPlayCount!=null">
+			 and play_count<![CDATA[>]]>#{greaterPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPlayCount!=null">
+			 and play_count<![CDATA[>=]]>#{greaterEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPlayCount!=null">
+			 and play_count<![CDATA[<]]>#{lessPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPlayCount!=null">
+			 and play_count<![CDATA[<=]]>#{lessEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="upCount!=null">
+			 and up_count=#{upCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullUpCount!=null and isNotNullUpCount==true">
+			 and up_count is not null
+		</if>
+		<if test="isNotNullUpCount!=null and isNotNullUpCount==false">
+			 and up_count is null
+		</if>
+		<if test="inUpCount!=null">
+			 and up_count in
+			<foreach collection="list" index="index" item="inUpCount" open="(" separator="," close=")">
+				#{inUpCount}
+			</foreach>
+		</if>
+		<if test="notInUpCount!=null">
+			 and up_count not in
+			<foreach collection="list" index="index" item="notInUpCount" open="(" separator="," close=")">
+				#{notInUpCount}
+			</foreach>
+		</if>
+		<if test="noEqualsUpCount!=null">
+			 and up_count<![CDATA[<>]]>#{noEqualsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsUpCount!=null">
+			 and up_count=#{equalsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterUpCount!=null">
+			 and up_count<![CDATA[>]]>#{greaterUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsUpCount!=null">
+			 and up_count<![CDATA[>=]]>#{greaterEqualsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessUpCount!=null">
+			 and up_count<![CDATA[<]]>#{lessUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsUpCount!=null">
+			 and up_count<![CDATA[<=]]>#{lessEqualsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="downCount!=null">
+			 and down_count=#{downCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullDownCount!=null and isNotNullDownCount==true">
+			 and down_count is not null
+		</if>
+		<if test="isNotNullDownCount!=null and isNotNullDownCount==false">
+			 and down_count is null
+		</if>
+		<if test="inDownCount!=null">
+			 and down_count in
+			<foreach collection="list" index="index" item="inDownCount" open="(" separator="," close=")">
+				#{inDownCount}
+			</foreach>
+		</if>
+		<if test="notInDownCount!=null">
+			 and down_count not in
+			<foreach collection="list" index="index" item="notInDownCount" open="(" separator="," close=")">
+				#{notInDownCount}
+			</foreach>
+		</if>
+		<if test="noEqualsDownCount!=null">
+			 and down_count<![CDATA[<>]]>#{noEqualsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsDownCount!=null">
+			 and down_count=#{equalsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterDownCount!=null">
+			 and down_count<![CDATA[>]]>#{greaterDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsDownCount!=null">
+			 and down_count<![CDATA[>=]]>#{greaterEqualsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessDownCount!=null">
+			 and down_count<![CDATA[<]]>#{lessDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsDownCount!=null">
+			 and down_count<![CDATA[<=]]>#{lessEqualsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="commentCount!=null">
+			 and comment_count=#{commentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==true">
+			 and comment_count is not null
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==false">
+			 and comment_count is null
+		</if>
+		<if test="inCommentCount!=null">
+			 and comment_count in
+			<foreach collection="list" index="index" item="inCommentCount" open="(" separator="," close=")">
+				#{inCommentCount}
+			</foreach>
+		</if>
+		<if test="notInCommentCount!=null">
+			 and comment_count not in
+			<foreach collection="list" index="index" item="notInCommentCount" open="(" separator="," close=")">
+				#{notInCommentCount}
+			</foreach>
+		</if>
+		<if test="noEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<>]]>#{noEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsCommentCount!=null">
+			 and comment_count=#{equalsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterCommentCount!=null">
+			 and comment_count<![CDATA[>]]>#{greaterCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsCommentCount!=null">
+			 and comment_count<![CDATA[>=]]>#{greaterEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessCommentCount!=null">
+			 and comment_count<![CDATA[<]]>#{lessCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<=]]>#{lessEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==true">
+			 and create_time is not null
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==false">
+			 and create_time is null
+		</if>
+		<if test="inCreateTime!=null">
+			 and create_time in
+			<foreach collection="list" index="index" item="inCreateTime" open="(" separator="," close=")">
+				#{inCreateTime}
+			</foreach>
+		</if>
+		<if test="notInCreateTime!=null">
+			 and create_time not in
+			<foreach collection="list" index="index" item="notInCreateTime" open="(" separator="," close=")">
+				#{notInCreateTime}
+			</foreach>
+		</if>
+		<if test="noEqualsCreateTime!=null">
+			 and create_time<![CDATA[<>]]>#{noEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCreateTime!=null">
+			 and create_time=#{equalsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCreateTime!=null">
+			 and create_time<![CDATA[>]]>#{greaterCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCreateTime!=null">
+			 and create_time<![CDATA[>=]]>#{greaterEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCreateTime!=null">
+			 and create_time<![CDATA[<]]>#{lessCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCreateTime!=null">
+			 and create_time<![CDATA[<=]]>#{lessEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCreateTime!=null">
+			 and create_time like "%"#{likeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCreateTime!=null">
+			 and create_time like "%"#{leftLikeCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCreateTime!=null">
+			 and create_time like #{rightLikeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoPropertyCondition_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==true">
+			 and play_count is not null
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==false">
+			 and play_count is null
+		</if>
+		<if test="inPlayCount!=null">
+			 and play_count in
+			<foreach collection="list" index="index" item="inPlayCount" open="(" separator="," close=")">
+				#{inPlayCount}
+			</foreach>
+		</if>
+		<if test="notInPlayCount!=null">
+			 and play_count not in
+			<foreach collection="list" index="index" item="notInPlayCount" open="(" separator="," close=")">
+				#{notInPlayCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPlayCount!=null">
+			 and play_count<![CDATA[<>]]>#{noEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPlayCount!=null">
+			 and play_count=#{equalsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPlayCount!=null">
+			 and play_count<![CDATA[>]]>#{greaterPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPlayCount!=null">
+			 and play_count<![CDATA[>=]]>#{greaterEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPlayCount!=null">
+			 and play_count<![CDATA[<]]>#{lessPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPlayCount!=null">
+			 and play_count<![CDATA[<=]]>#{lessEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullUpCount!=null and isNotNullUpCount==true">
+			 and up_count is not null
+		</if>
+		<if test="isNotNullUpCount!=null and isNotNullUpCount==false">
+			 and up_count is null
+		</if>
+		<if test="inUpCount!=null">
+			 and up_count in
+			<foreach collection="list" index="index" item="inUpCount" open="(" separator="," close=")">
+				#{inUpCount}
+			</foreach>
+		</if>
+		<if test="notInUpCount!=null">
+			 and up_count not in
+			<foreach collection="list" index="index" item="notInUpCount" open="(" separator="," close=")">
+				#{notInUpCount}
+			</foreach>
+		</if>
+		<if test="noEqualsUpCount!=null">
+			 and up_count<![CDATA[<>]]>#{noEqualsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsUpCount!=null">
+			 and up_count=#{equalsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterUpCount!=null">
+			 and up_count<![CDATA[>]]>#{greaterUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsUpCount!=null">
+			 and up_count<![CDATA[>=]]>#{greaterEqualsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessUpCount!=null">
+			 and up_count<![CDATA[<]]>#{lessUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsUpCount!=null">
+			 and up_count<![CDATA[<=]]>#{lessEqualsUpCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullDownCount!=null and isNotNullDownCount==true">
+			 and down_count is not null
+		</if>
+		<if test="isNotNullDownCount!=null and isNotNullDownCount==false">
+			 and down_count is null
+		</if>
+		<if test="inDownCount!=null">
+			 and down_count in
+			<foreach collection="list" index="index" item="inDownCount" open="(" separator="," close=")">
+				#{inDownCount}
+			</foreach>
+		</if>
+		<if test="notInDownCount!=null">
+			 and down_count not in
+			<foreach collection="list" index="index" item="notInDownCount" open="(" separator="," close=")">
+				#{notInDownCount}
+			</foreach>
+		</if>
+		<if test="noEqualsDownCount!=null">
+			 and down_count<![CDATA[<>]]>#{noEqualsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsDownCount!=null">
+			 and down_count=#{equalsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterDownCount!=null">
+			 and down_count<![CDATA[>]]>#{greaterDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsDownCount!=null">
+			 and down_count<![CDATA[>=]]>#{greaterEqualsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessDownCount!=null">
+			 and down_count<![CDATA[<]]>#{lessDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsDownCount!=null">
+			 and down_count<![CDATA[<=]]>#{lessEqualsDownCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==true">
+			 and comment_count is not null
+		</if>
+		<if test="isNotNullCommentCount!=null and isNotNullCommentCount==false">
+			 and comment_count is null
+		</if>
+		<if test="inCommentCount!=null">
+			 and comment_count in
+			<foreach collection="list" index="index" item="inCommentCount" open="(" separator="," close=")">
+				#{inCommentCount}
+			</foreach>
+		</if>
+		<if test="notInCommentCount!=null">
+			 and comment_count not in
+			<foreach collection="list" index="index" item="notInCommentCount" open="(" separator="," close=")">
+				#{notInCommentCount}
+			</foreach>
+		</if>
+		<if test="noEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<>]]>#{noEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsCommentCount!=null">
+			 and comment_count=#{equalsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterCommentCount!=null">
+			 and comment_count<![CDATA[>]]>#{greaterCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsCommentCount!=null">
+			 and comment_count<![CDATA[>=]]>#{greaterEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessCommentCount!=null">
+			 and comment_count<![CDATA[<]]>#{lessCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsCommentCount!=null">
+			 and comment_count<![CDATA[<=]]>#{lessEqualsCommentCount,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==true">
+			 and create_time is not null
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==false">
+			 and create_time is null
+		</if>
+		<if test="inCreateTime!=null">
+			 and create_time in
+			<foreach collection="list" index="index" item="inCreateTime" open="(" separator="," close=")">
+				#{inCreateTime}
+			</foreach>
+		</if>
+		<if test="notInCreateTime!=null">
+			 and create_time not in
+			<foreach collection="list" index="index" item="notInCreateTime" open="(" separator="," close=")">
+				#{notInCreateTime}
+			</foreach>
+		</if>
+		<if test="noEqualsCreateTime!=null">
+			 and create_time<![CDATA[<>]]>#{noEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCreateTime!=null">
+			 and create_time=#{equalsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCreateTime!=null">
+			 and create_time<![CDATA[>]]>#{greaterCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCreateTime!=null">
+			 and create_time<![CDATA[>=]]>#{greaterEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCreateTime!=null">
+			 and create_time<![CDATA[<]]>#{lessCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCreateTime!=null">
+			 and create_time<![CDATA[<=]]>#{lessEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCreateTime!=null">
+			 and create_time like "%"#{likeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCreateTime!=null">
+			 and create_time like "%"#{leftLikeCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCreateTime!=null">
+			 and create_time like #{rightLikeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoProperty_UPDATE">
+	<set>
+		<if test="videoId!=null">
+			video_id=#{videoId,jdbcType=VARCHAR},
+		</if>
+		<if test="playCount!=null">
+			play_count=#{playCount,jdbcType=NUMERIC},
+		</if>
+		<if test="upCount!=null">
+			up_count=#{upCount,jdbcType=NUMERIC},
+		</if>
+		<if test="downCount!=null">
+			down_count=#{downCount,jdbcType=NUMERIC},
+		</if>
+		<if test="commentCount!=null">
+			comment_count=#{commentCount,jdbcType=NUMERIC},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+		<if test="createTime!=null">
+			create_time=#{createTime,jdbcType=VARCHAR},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertVideoProperty" parameterType="VideoProperty" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_video_property (video_id,play_count,up_count,down_count,comment_count,site,create_time) VALUES (#{videoId},#{playCount},#{upCount},#{downCount},#{commentCount},#{site},#{createTime})
+		]]>
+    </insert>
+    <update id="update_VideoProperty" parameterType="VideoProperty" flushCache="true">
+    	<![CDATA[UPDATE t_video_property SET video_id=#{videoId,jdbcType=VARCHAR},,play_count=#{playCount,jdbcType=NUMERIC},,up_count=#{upCount,jdbcType=NUMERIC},,down_count=#{downCount,jdbcType=NUMERIC},,comment_count=#{commentCount,jdbcType=NUMERIC},,site=#{site,jdbcType=NUMERIC},,create_time=#{createTime,jdbcType=VARCHAR}, WHERE video_id=#{videoId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+    <update id="updateVideoPropertyByExample" parameterType="VideoProperty" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_video_property
+    	]]>
+    	<include refid="VideoProperty_UPDATE" />
+    	<![CDATA[WHERE video_id=#{videoId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+  	<update id="updateVideoPropertyByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_video_property ${value}
+    	]]>
+  	</update>
+  	<update id="updateVideoPropertyByCondition" parameterType="cn.com.paladintyrion.client.search.VideoPropertySearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_video_property]]>
+    	<include refid="VideoProperty_UPDATE" />
+    	<include refid="VideoPropertyCondition_WHERE" />
+  	</update>
+  	<delete id="deleteVideoPropertyByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_video_property ${value}]]>
+  	</delete>
+  	<delete id="deleteVideoPropertyByExample" parameterType="VideoProperty" flushCache="true">
+    	<![CDATA[DELETE FROM t_video_property]]>
+    	<include refid="VideoProperty_WHERE" />
+  	</delete>
+  	<delete id="deleteVideoPropertyByCondition" parameterType="cn.com.paladintyrion.client.search.VideoPropertySearchBean" flushCache="true">
+    	<![CDATA[delete from t_video_property]]>
+    	<include refid="VideoPropertySearchBean_WHERE" />
+  	</delete>
+  	<select id="getVideoPropertyByWhere" parameterType="java.lang.String" resultType="VideoProperty" resultMap="t_video_propertyMap">
+    	<![CDATA[SELECT * FROM t_video_property ${value}]]>
+  	</select>
+  	<select id="getVideoPropertyByExample" parameterType="VideoProperty" resultType="VideoProperty" resultMap="t_video_propertyMap">  
+        <![CDATA[
+			SELECT * FROM t_video_property
+		]]>
+        <include refid="VideoProperty_WHERE" />
+    </select>
+    <select id="getVideoPropertyByCondition" parameterType="cn.com.paladintyrion.client.search.VideoPropertySearchBean" resultType="VideoProperty" resultMap="t_video_propertyMap">
+    	<![CDATA[SELECT * FROM t_video_property]]>
+    	<include refid="VideoPropertySearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getVideoPropertyListByWhere" parameterType="java.lang.String" resultType="VideoProperty" resultMap="t_video_propertyMap">
+    	<![CDATA[SELECT * FROM t_video_property ${sql}]]>
+  	</select>
+  	<select id="getVideoPropertyListByCondition" parameterType="cn.com.paladintyrion.client.search.VideoPropertySearchBean" resultType="VideoProperty" resultMap="t_video_propertyMap">
+    	<![CDATA[SELECT * FROM t_video_property]]>
+    	<include refid="VideoPropertySearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getVideoPropertyCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_property ${value}]]>
+  	</select>
+  	<select id="getVideoPropertyCountByExample" parameterType="VideoProperty" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_property]]>
+    	<include refid="VideoProperty_WHERE" />
+  	</select>
+  	<select id="getVideoPropertyCountByCondition" parameterType="cn.com.paladintyrion.client.search.VideoPropertySearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_property]]>
+    	<include refid="VideoPropertySearchBean_WHERE" />
+  	</select>
+  	<select id="getVideoPropertyColumnByWhere" parameterType="cn.com.paladintyrion.client.search.VideoPropertySearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT $columnSql$ FROM t_video_property]]>
+    	<include refid="VideoPropertySearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>
+	<properties>
+		<property name="dialect" value="mysql" />
+	</properties>
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="localCacheScope" value="STATEMENT"/>
+		<setting name="defaultExecutorType" value="SIMPLE"/>
+	</settings>
+	
+    <typeAliases>
+        <typeAlias alias="CollectPlayInfo" type="cn.com.paladintyrion.client.bean.CollectPlayInfo"/>
+        <typeAlias alias="CollectProperty" type="cn.com.paladintyrion.client.bean.CollectProperty"/>
+        <typeAlias alias="Comment" type="cn.com.paladintyrion.client.bean.Comment"/>
+        <typeAlias alias="UserInfo" type="cn.com.paladintyrion.client.bean.UserInfo"/>
+        <typeAlias alias="VideoCollect" type="cn.com.paladintyrion.client.bean.VideoCollect"/>
+        <typeAlias alias="VideoCollectComment" type="cn.com.paladintyrion.client.bean.VideoCollectComment"/>
+        <typeAlias alias="VideoInfo" type="cn.com.paladintyrion.client.bean.VideoInfo"/>
+        <typeAlias alias="VideoProperty" type="cn.com.paladintyrion.client.bean.VideoProperty"/>
+	<typeAlias alias="CollectAddress" type="cn.com.paladintyrion.client.bean.CollectAddress"/>
+	<typeAlias alias="VideoCollectHistory" type="cn.com.paladintyrion.client.bean.VideoCollectHistory"/>
+	<typeAlias alias="VideoPropertyHistory" type="cn.com.paladintyrion.client.bean.VideoPropertyHistory"/>
+    </typeAliases>
+    <typeHandlers>
+	<typeHandler handler="org.apache.ibatis.type.ClobTypeHandler" jdbcType="CLOB" javaType="java.lang.String"/>	    
+    </typeHandlers>
+    <plugins>
+        <plugin interceptor="org.mybatis.commons.dialect.PaginationInterceptor" />
+    </plugins>
+    <mappers>
+	<mapper resource="conf/mybatis/CollectPlayInfo.xml" />
+	<mapper resource="conf/mybatis/CollectProperty.xml" />
+	<mapper resource="conf/mybatis/Comment.xml" />
+	<mapper resource="conf/mybatis/UserInfo.xml" />
+	<mapper resource="conf/mybatis/VideoCollect.xml" />
+	<mapper resource="conf/mybatis/VideoCollectComment.xml" />
+	<mapper resource="conf/mybatis/VideoInfo.xml" />
+	<mapper resource="conf/mybatis/VideoProperty.xml" />
+	<mapper resource="conf/mybatis/CollectAddress.xml" />
+	<mapper resource="conf/mybatis/VideoCollectHistory.xml" />
+	<mapper resource="conf/mybatis/VideoPropertyHistory.xml" />
+    </mappers>
+</configuration>

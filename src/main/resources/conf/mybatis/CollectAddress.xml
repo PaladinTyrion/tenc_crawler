@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.CollectAddressDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="CollectAddress" id="t_collect_addressMap">
+      	<result property="id" column="id" />
+		<result property="collectName" column="collect_name" />
+		<result property="url" column="url" />
+		<result property="collectType" column="collect_type" />
+		<result property="site" column="site" />
+		<result property="taskType" column="task_type" />
+		<result property="state" column="state" />
+  	</resultMap>
+  	<sql id="CollectAddress_WHERE">
+	<where>
+		<if test="id!=null">
+			 and id=#{id,jdbcType=VARCHAR}
+		</if>
+		<if test="collectName!=null">
+			 and collect_name=#{collectName,jdbcType=VARCHAR}
+		</if>
+		<if test="url!=null">
+			 and url=#{url,jdbcType=VARCHAR}
+		</if>
+		<if test="collectType!=null">
+			 and collect_type=#{collectType,jdbcType=VARCHAR}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="taskType!=null">
+			 and task_type=#{taskType,jdbcType=NUMERIC}
+		</if>
+		<if test="state!=null">
+			 and state=#{state,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectAddressSearchBean_WHERE">
+	<where>
+		<if test="id!=null">
+			 and id=#{id,jdbcType=VARCHAR}
+		</if>
+		<if test="collectName!=null">
+			 and collect_name=#{collectName,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==true">
+			 and collect_name is not null
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==false">
+			 and collect_name is null
+		</if>
+		<if test="inCollectName!=null">
+			 and collect_name in
+			<foreach collection="list" index="index" item="inCollectName" open="(" separator="," close=")">
+				#{inCollectName}
+			</foreach>
+		</if>
+		<if test="notInCollectName!=null">
+			 and collect_name not in
+			<foreach collection="list" index="index" item="notInCollectName" open="(" separator="," close=")">
+				#{notInCollectName}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectName!=null">
+			 and collect_name<![CDATA[<>]]>#{noEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectName!=null">
+			 and collect_name=#{equalsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectName!=null">
+			 and collect_name<![CDATA[>]]>#{greaterCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectName!=null">
+			 and collect_name<![CDATA[>=]]>#{greaterEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectName!=null">
+			 and collect_name<![CDATA[<]]>#{lessCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectName!=null">
+			 and collect_name<![CDATA[<=]]>#{lessEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectName!=null">
+			 and collect_name like "%"#{likeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectName!=null">
+			 and collect_name like "%"#{leftLikeCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectName!=null">
+			 and collect_name like #{rightLikeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="url!=null">
+			 and url=#{url,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==true">
+			 and url is not null
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==false">
+			 and url is null
+		</if>
+		<if test="inUrl!=null">
+			 and url in
+			<foreach collection="list" index="index" item="inUrl" open="(" separator="," close=")">
+				#{inUrl}
+			</foreach>
+		</if>
+		<if test="notInUrl!=null">
+			 and url not in
+			<foreach collection="list" index="index" item="notInUrl" open="(" separator="," close=")">
+				#{notInUrl}
+			</foreach>
+		</if>
+		<if test="noEqualsUrl!=null">
+			 and url<![CDATA[<>]]>#{noEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUrl!=null">
+			 and url=#{equalsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUrl!=null">
+			 and url<![CDATA[>]]>#{greaterUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUrl!=null">
+			 and url<![CDATA[>=]]>#{greaterEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUrl!=null">
+			 and url<![CDATA[<]]>#{lessUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUrl!=null">
+			 and url<![CDATA[<=]]>#{lessEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUrl!=null">
+			 and url like "%"#{likeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUrl!=null">
+			 and url like "%"#{leftLikeUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUrl!=null">
+			 and url like #{rightLikeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="collectType!=null">
+			 and collect_type=#{collectType,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectType!=null and isNotNullCollectType==true">
+			 and collect_type is not null
+		</if>
+		<if test="isNotNullCollectType!=null and isNotNullCollectType==false">
+			 and collect_type is null
+		</if>
+		<if test="inCollectType!=null">
+			 and collect_type in
+			<foreach collection="list" index="index" item="inCollectType" open="(" separator="," close=")">
+				#{inCollectType}
+			</foreach>
+		</if>
+		<if test="notInCollectType!=null">
+			 and collect_type not in
+			<foreach collection="list" index="index" item="notInCollectType" open="(" separator="," close=")">
+				#{notInCollectType}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectType!=null">
+			 and collect_type<![CDATA[<>]]>#{noEqualsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectType!=null">
+			 and collect_type=#{equalsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectType!=null">
+			 and collect_type<![CDATA[>]]>#{greaterCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectType!=null">
+			 and collect_type<![CDATA[>=]]>#{greaterEqualsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectType!=null">
+			 and collect_type<![CDATA[<]]>#{lessCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectType!=null">
+			 and collect_type<![CDATA[<=]]>#{lessEqualsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectType!=null">
+			 and collect_type like "%"#{likeCollectType,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectType!=null">
+			 and collect_type like "%"#{leftLikeCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectType!=null">
+			 and collect_type like #{rightLikeCollectType,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullSite!=null and isNotNullSite==true">
+			 and site is not null
+		</if>
+		<if test="isNotNullSite!=null and isNotNullSite==false">
+			 and site is null
+		</if>
+		<if test="inSite!=null">
+			 and site in
+			<foreach collection="list" index="index" item="inSite" open="(" separator="," close=")">
+				#{inSite}
+			</foreach>
+		</if>
+		<if test="notInSite!=null">
+			 and site not in
+			<foreach collection="list" index="index" item="notInSite" open="(" separator="," close=")">
+				#{notInSite}
+			</foreach>
+		</if>
+		<if test="noEqualsSite!=null">
+			 and site<![CDATA[<>]]>#{noEqualsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsSite!=null">
+			 and site=#{equalsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterSite!=null">
+			 and site<![CDATA[>]]>#{greaterSite,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsSite!=null">
+			 and site<![CDATA[>=]]>#{greaterEqualsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="lessSite!=null">
+			 and site<![CDATA[<]]>#{lessSite,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsSite!=null">
+			 and site<![CDATA[<=]]>#{lessEqualsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="taskType!=null">
+			 and task_type=#{taskType,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullTaskType!=null and isNotNullTaskType==true">
+			 and task_type is not null
+		</if>
+		<if test="isNotNullTaskType!=null and isNotNullTaskType==false">
+			 and task_type is null
+		</if>
+		<if test="inTaskType!=null">
+			 and task_type in
+			<foreach collection="list" index="index" item="inTaskType" open="(" separator="," close=")">
+				#{inTaskType}
+			</foreach>
+		</if>
+		<if test="notInTaskType!=null">
+			 and task_type not in
+			<foreach collection="list" index="index" item="notInTaskType" open="(" separator="," close=")">
+				#{notInTaskType}
+			</foreach>
+		</if>
+		<if test="noEqualsTaskType!=null">
+			 and task_type<![CDATA[<>]]>#{noEqualsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsTaskType!=null">
+			 and task_type=#{equalsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterTaskType!=null">
+			 and task_type<![CDATA[>]]>#{greaterTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsTaskType!=null">
+			 and task_type<![CDATA[>=]]>#{greaterEqualsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="lessTaskType!=null">
+			 and task_type<![CDATA[<]]>#{lessTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsTaskType!=null">
+			 and task_type<![CDATA[<=]]>#{lessEqualsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="state!=null">
+			 and state=#{state,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullState!=null and isNotNullState==true">
+			 and state is not null
+		</if>
+		<if test="isNotNullState!=null and isNotNullState==false">
+			 and state is null
+		</if>
+		<if test="inState!=null">
+			 and state in
+			<foreach collection="list" index="index" item="inState" open="(" separator="," close=")">
+				#{inState}
+			</foreach>
+		</if>
+		<if test="notInState!=null">
+			 and state not in
+			<foreach collection="list" index="index" item="notInState" open="(" separator="," close=")">
+				#{notInState}
+			</foreach>
+		</if>
+		<if test="noEqualsState!=null">
+			 and state<![CDATA[<>]]>#{noEqualsState,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsState!=null">
+			 and state=#{equalsState,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterState!=null">
+			 and state<![CDATA[>]]>#{greaterState,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsState!=null">
+			 and state<![CDATA[>=]]>#{greaterEqualsState,jdbcType=NUMERIC}
+		</if>
+		<if test="lessState!=null">
+			 and state<![CDATA[<]]>#{lessState,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsState!=null">
+			 and state<![CDATA[<=]]>#{lessEqualsState,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectAddressCondition_WHERE">
+	<where>
+		<if test="id!=null">
+			 and id=#{id,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==true">
+			 and collect_name is not null
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==false">
+			 and collect_name is null
+		</if>
+		<if test="inCollectName!=null">
+			 and collect_name in
+			<foreach collection="list" index="index" item="inCollectName" open="(" separator="," close=")">
+				#{inCollectName}
+			</foreach>
+		</if>
+		<if test="notInCollectName!=null">
+			 and collect_name not in
+			<foreach collection="list" index="index" item="notInCollectName" open="(" separator="," close=")">
+				#{notInCollectName}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectName!=null">
+			 and collect_name<![CDATA[<>]]>#{noEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectName!=null">
+			 and collect_name=#{equalsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectName!=null">
+			 and collect_name<![CDATA[>]]>#{greaterCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectName!=null">
+			 and collect_name<![CDATA[>=]]>#{greaterEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectName!=null">
+			 and collect_name<![CDATA[<]]>#{lessCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectName!=null">
+			 and collect_name<![CDATA[<=]]>#{lessEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectName!=null">
+			 and collect_name like "%"#{likeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectName!=null">
+			 and collect_name like "%"#{leftLikeCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectName!=null">
+			 and collect_name like #{rightLikeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==true">
+			 and url is not null
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==false">
+			 and url is null
+		</if>
+		<if test="inUrl!=null">
+			 and url in
+			<foreach collection="list" index="index" item="inUrl" open="(" separator="," close=")">
+				#{inUrl}
+			</foreach>
+		</if>
+		<if test="notInUrl!=null">
+			 and url not in
+			<foreach collection="list" index="index" item="notInUrl" open="(" separator="," close=")">
+				#{notInUrl}
+			</foreach>
+		</if>
+		<if test="noEqualsUrl!=null">
+			 and url<![CDATA[<>]]>#{noEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUrl!=null">
+			 and url=#{equalsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUrl!=null">
+			 and url<![CDATA[>]]>#{greaterUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUrl!=null">
+			 and url<![CDATA[>=]]>#{greaterEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUrl!=null">
+			 and url<![CDATA[<]]>#{lessUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUrl!=null">
+			 and url<![CDATA[<=]]>#{lessEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUrl!=null">
+			 and url like "%"#{likeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUrl!=null">
+			 and url like "%"#{leftLikeUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUrl!=null">
+			 and url like #{rightLikeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCollectType!=null and isNotNullCollectType==true">
+			 and collect_type is not null
+		</if>
+		<if test="isNotNullCollectType!=null and isNotNullCollectType==false">
+			 and collect_type is null
+		</if>
+		<if test="inCollectType!=null">
+			 and collect_type in
+			<foreach collection="list" index="index" item="inCollectType" open="(" separator="," close=")">
+				#{inCollectType}
+			</foreach>
+		</if>
+		<if test="notInCollectType!=null">
+			 and collect_type not in
+			<foreach collection="list" index="index" item="notInCollectType" open="(" separator="," close=")">
+				#{notInCollectType}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectType!=null">
+			 and collect_type<![CDATA[<>]]>#{noEqualsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectType!=null">
+			 and collect_type=#{equalsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectType!=null">
+			 and collect_type<![CDATA[>]]>#{greaterCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectType!=null">
+			 and collect_type<![CDATA[>=]]>#{greaterEqualsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectType!=null">
+			 and collect_type<![CDATA[<]]>#{lessCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectType!=null">
+			 and collect_type<![CDATA[<=]]>#{lessEqualsCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectType!=null">
+			 and collect_type like "%"#{likeCollectType,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectType!=null">
+			 and collect_type like "%"#{leftLikeCollectType,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectType!=null">
+			 and collect_type like #{rightLikeCollectType,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullSite!=null and isNotNullSite==true">
+			 and site is not null
+		</if>
+		<if test="isNotNullSite!=null and isNotNullSite==false">
+			 and site is null
+		</if>
+		<if test="inSite!=null">
+			 and site in
+			<foreach collection="list" index="index" item="inSite" open="(" separator="," close=")">
+				#{inSite}
+			</foreach>
+		</if>
+		<if test="notInSite!=null">
+			 and site not in
+			<foreach collection="list" index="index" item="notInSite" open="(" separator="," close=")">
+				#{notInSite}
+			</foreach>
+		</if>
+		<if test="noEqualsSite!=null">
+			 and site<![CDATA[<>]]>#{noEqualsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsSite!=null">
+			 and site=#{equalsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterSite!=null">
+			 and site<![CDATA[>]]>#{greaterSite,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsSite!=null">
+			 and site<![CDATA[>=]]>#{greaterEqualsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="lessSite!=null">
+			 and site<![CDATA[<]]>#{lessSite,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsSite!=null">
+			 and site<![CDATA[<=]]>#{lessEqualsSite,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullTaskType!=null and isNotNullTaskType==true">
+			 and task_type is not null
+		</if>
+		<if test="isNotNullTaskType!=null and isNotNullTaskType==false">
+			 and task_type is null
+		</if>
+		<if test="inTaskType!=null">
+			 and task_type in
+			<foreach collection="list" index="index" item="inTaskType" open="(" separator="," close=")">
+				#{inTaskType}
+			</foreach>
+		</if>
+		<if test="notInTaskType!=null">
+			 and task_type not in
+			<foreach collection="list" index="index" item="notInTaskType" open="(" separator="," close=")">
+				#{notInTaskType}
+			</foreach>
+		</if>
+		<if test="noEqualsTaskType!=null">
+			 and task_type<![CDATA[<>]]>#{noEqualsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsTaskType!=null">
+			 and task_type=#{equalsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterTaskType!=null">
+			 and task_type<![CDATA[>]]>#{greaterTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsTaskType!=null">
+			 and task_type<![CDATA[>=]]>#{greaterEqualsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="lessTaskType!=null">
+			 and task_type<![CDATA[<]]>#{lessTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsTaskType!=null">
+			 and task_type<![CDATA[<=]]>#{lessEqualsTaskType,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullState!=null and isNotNullState==true">
+			 and state is not null
+		</if>
+		<if test="isNotNullState!=null and isNotNullState==false">
+			 and state is null
+		</if>
+		<if test="inState!=null">
+			 and state in
+			<foreach collection="list" index="index" item="inState" open="(" separator="," close=")">
+				#{inState}
+			</foreach>
+		</if>
+		<if test="notInState!=null">
+			 and state not in
+			<foreach collection="list" index="index" item="notInState" open="(" separator="," close=")">
+				#{notInState}
+			</foreach>
+		</if>
+		<if test="noEqualsState!=null">
+			 and state<![CDATA[<>]]>#{noEqualsState,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsState!=null">
+			 and state=#{equalsState,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterState!=null">
+			 and state<![CDATA[>]]>#{greaterState,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsState!=null">
+			 and state<![CDATA[>=]]>#{greaterEqualsState,jdbcType=NUMERIC}
+		</if>
+		<if test="lessState!=null">
+			 and state<![CDATA[<]]>#{lessState,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsState!=null">
+			 and state<![CDATA[<=]]>#{lessEqualsState,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectAddress_UPDATE">
+	<set>
+		<if test="id!=null">
+			id=#{id,jdbcType=VARCHAR},
+		</if>
+		<if test="collectName!=null">
+			collect_name=#{collectName,jdbcType=VARCHAR},
+		</if>
+		<if test="url!=null">
+			url=#{url,jdbcType=VARCHAR},
+		</if>
+		<if test="collectType!=null">
+			collect_type=#{collectType,jdbcType=VARCHAR},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+		<if test="taskType!=null">
+			task_type=#{taskType,jdbcType=NUMERIC},
+		</if>
+		<if test="state!=null">
+			state=#{state,jdbcType=NUMERIC},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertCollectAddress" parameterType="CollectAddress" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_collect_address (id,collect_name,url,collect_type,site,task_type,state) VALUES (#{id},#{collectName},#{url},#{collectType},#{site},#{taskType},#{state})
+		]]>
+    </insert>
+    <update id="update_CollectAddress" parameterType="CollectAddress" flushCache="true">
+    	<![CDATA[UPDATE t_collect_address SET id=#{id,jdbcType=VARCHAR},,collect_name=#{collectName,jdbcType=VARCHAR},,url=#{url,jdbcType=VARCHAR},,collect_type=#{collectType,jdbcType=VARCHAR},,site=#{site,jdbcType=NUMERIC},,task_type=#{taskType,jdbcType=NUMERIC},,state=#{state,jdbcType=NUMERIC}, WHERE id=#{id,jdbcType=VARCHAR}]]>
+  	</update>
+    <update id="updateCollectAddressByExample" parameterType="CollectAddress" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_collect_address
+    	]]>
+    	<include refid="CollectAddress_UPDATE" />
+    	<![CDATA[WHERE id=#{id,jdbcType=VARCHAR}]]>
+  	</update>
+  	<update id="updateCollectAddressByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_collect_address ${value}
+    	]]>
+  	</update>
+  	<update id="updateCollectAddressByCondition" parameterType="cn.com.paladintyrion.client.search.CollectAddressSearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_collect_address]]>
+    	<include refid="CollectAddress_UPDATE" />
+    	<include refid="CollectAddressCondition_WHERE" />
+  	</update>
+  	<delete id="deleteCollectAddressByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_collect_address ${value}]]>
+  	</delete>
+  	<delete id="deleteCollectAddressByExample" parameterType="CollectAddress" flushCache="true">
+    	<![CDATA[DELETE FROM t_collect_address]]>
+    	<include refid="CollectAddress_WHERE" />
+  	</delete>
+  	<delete id="deleteCollectAddressByCondition" parameterType="cn.com.paladintyrion.client.search.CollectAddressSearchBean" flushCache="true">
+    	<![CDATA[delete from t_collect_address]]>
+    	<include refid="CollectAddressSearchBean_WHERE" />
+  	</delete>
+  	<select id="getCollectAddressByWhere" parameterType="java.lang.String" resultType="CollectAddress" resultMap="t_collect_addressMap">
+    	<![CDATA[SELECT * FROM t_collect_address ${value}]]>
+  	</select>
+  	<select id="getCollectAddressByExample" parameterType="CollectAddress" resultType="CollectAddress" resultMap="t_collect_addressMap">  
+        <![CDATA[
+			SELECT * FROM t_collect_address
+		]]>
+        <include refid="CollectAddress_WHERE" />
+    </select>
+    <select id="getCollectAddressByCondition" parameterType="cn.com.paladintyrion.client.search.CollectAddressSearchBean" resultType="CollectAddress" resultMap="t_collect_addressMap">
+    	<![CDATA[SELECT * FROM t_collect_address]]>
+    	<include refid="CollectAddressSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCollectAddressListByWhere" parameterType="java.lang.String" resultType="CollectAddress" resultMap="t_collect_addressMap">
+    	<![CDATA[SELECT * FROM t_collect_address ${sql}]]>
+  	</select>
+  	<select id="getCollectAddressListByCondition" parameterType="cn.com.paladintyrion.client.search.CollectAddressSearchBean" resultType="CollectAddress" resultMap="t_collect_addressMap">
+    	<![CDATA[SELECT * FROM t_collect_address]]>
+    	<include refid="CollectAddressSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCollectAddressCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_address ${value}]]>
+  	</select>
+  	<select id="getCollectAddressCountByExample" parameterType="CollectAddress" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_address]]>
+    	<include refid="CollectAddress_WHERE" />
+  	</select>
+  	<select id="getCollectAddressCountByCondition" parameterType="cn.com.paladintyrion.client.search.CollectAddressSearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_address]]>
+    	<include refid="CollectAddressSearchBean_WHERE" />
+  	</select>
+  	<select id="getCollectAddressColumnByWhere" parameterType="cn.com.paladintyrion.client.search.CollectAddressSearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT $columnSql$ FROM t_collect_address]]>
+    	<include refid="CollectAddressSearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

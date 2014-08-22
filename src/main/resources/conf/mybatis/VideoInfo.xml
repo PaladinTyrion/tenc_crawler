@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.VideoInfoDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="VideoInfo" id="t_video_infoMap">
+      	<result property="videoId" column="video_id" />
+		<result property="videoName" column="video_name" />
+		<result property="videoSubName" column="video_sub_name" />
+		<result property="collectId" column="collect_id" />
+		<result property="uploadTime" column="upload_time" />
+		<result property="videoDesc" column="video_desc" />
+		<result property="videoFocus" column="video_focus" />
+		<result property="category" column="category" />
+		<result property="actor" column="actor" />
+		<result property="tag" column="tag" />
+		<result property="videoTime" column="video_time" />
+		<result property="site" column="site" />
+		<result property="url" column="url" />
+		<result property="createTime" column="create_time" />
+  	</resultMap>
+  	<sql id="VideoInfo_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="videoName!=null">
+			 and video_name=#{videoName,jdbcType=VARCHAR}
+		</if>
+		<if test="videoSubName!=null">
+			 and video_sub_name=#{videoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="uploadTime!=null">
+			 and upload_time=#{uploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="videoDesc!=null">
+			 and video_desc=#{videoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="videoFocus!=null">
+			 and video_focus=#{videoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="category!=null">
+			 and category=#{category,jdbcType=VARCHAR}
+		</if>
+		<if test="actor!=null">
+			 and actor=#{actor,jdbcType=VARCHAR}
+		</if>
+		<if test="tag!=null">
+			 and tag=#{tag,jdbcType=VARCHAR}
+		</if>
+		<if test="videoTime!=null">
+			 and video_time=#{videoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="url!=null">
+			 and url=#{url,jdbcType=VARCHAR}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoInfoSearchBean_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="videoName!=null">
+			 and video_name=#{videoName,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullVideoName!=null and isNotNullVideoName==true">
+			 and video_name is not null
+		</if>
+		<if test="isNotNullVideoName!=null and isNotNullVideoName==false">
+			 and video_name is null
+		</if>
+		<if test="inVideoName!=null">
+			 and video_name in
+			<foreach collection="list" index="index" item="inVideoName" open="(" separator="," close=")">
+				#{inVideoName}
+			</foreach>
+		</if>
+		<if test="notInVideoName!=null">
+			 and video_name not in
+			<foreach collection="list" index="index" item="notInVideoName" open="(" separator="," close=")">
+				#{notInVideoName}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoName!=null">
+			 and video_name<![CDATA[<>]]>#{noEqualsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoName!=null">
+			 and video_name=#{equalsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoName!=null">
+			 and video_name<![CDATA[>]]>#{greaterVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoName!=null">
+			 and video_name<![CDATA[>=]]>#{greaterEqualsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoName!=null">
+			 and video_name<![CDATA[<]]>#{lessVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoName!=null">
+			 and video_name<![CDATA[<=]]>#{lessEqualsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoName!=null">
+			 and video_name like "%"#{likeVideoName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoName!=null">
+			 and video_name like "%"#{leftLikeVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoName!=null">
+			 and video_name like #{rightLikeVideoName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="videoSubName!=null">
+			 and video_sub_name=#{videoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullVideoSubName!=null and isNotNullVideoSubName==true">
+			 and video_sub_name is not null
+		</if>
+		<if test="isNotNullVideoSubName!=null and isNotNullVideoSubName==false">
+			 and video_sub_name is null
+		</if>
+		<if test="inVideoSubName!=null">
+			 and video_sub_name in
+			<foreach collection="list" index="index" item="inVideoSubName" open="(" separator="," close=")">
+				#{inVideoSubName}
+			</foreach>
+		</if>
+		<if test="notInVideoSubName!=null">
+			 and video_sub_name not in
+			<foreach collection="list" index="index" item="notInVideoSubName" open="(" separator="," close=")">
+				#{notInVideoSubName}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoSubName!=null">
+			 and video_sub_name<![CDATA[<>]]>#{noEqualsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoSubName!=null">
+			 and video_sub_name=#{equalsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoSubName!=null">
+			 and video_sub_name<![CDATA[>]]>#{greaterVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoSubName!=null">
+			 and video_sub_name<![CDATA[>=]]>#{greaterEqualsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoSubName!=null">
+			 and video_sub_name<![CDATA[<]]>#{lessVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoSubName!=null">
+			 and video_sub_name<![CDATA[<=]]>#{lessEqualsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoSubName!=null">
+			 and video_sub_name like "%"#{likeVideoSubName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoSubName!=null">
+			 and video_sub_name like "%"#{leftLikeVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoSubName!=null">
+			 and video_sub_name like #{rightLikeVideoSubName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectId!=null and isNotNullCollectId==true">
+			 and collect_id is not null
+		</if>
+		<if test="isNotNullCollectId!=null and isNotNullCollectId==false">
+			 and collect_id is null
+		</if>
+		<if test="inCollectId!=null">
+			 and collect_id in
+			<foreach collection="list" index="index" item="inCollectId" open="(" separator="," close=")">
+				#{inCollectId}
+			</foreach>
+		</if>
+		<if test="notInCollectId!=null">
+			 and collect_id not in
+			<foreach collection="list" index="index" item="notInCollectId" open="(" separator="," close=")">
+				#{notInCollectId}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectId!=null">
+			 and collect_id<![CDATA[<>]]>#{noEqualsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectId!=null">
+			 and collect_id=#{equalsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectId!=null">
+			 and collect_id<![CDATA[>]]>#{greaterCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectId!=null">
+			 and collect_id<![CDATA[>=]]>#{greaterEqualsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectId!=null">
+			 and collect_id<![CDATA[<]]>#{lessCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectId!=null">
+			 and collect_id<![CDATA[<=]]>#{lessEqualsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectId!=null">
+			 and collect_id like "%"#{likeCollectId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectId!=null">
+			 and collect_id like "%"#{leftLikeCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectId!=null">
+			 and collect_id like #{rightLikeCollectId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="uploadTime!=null">
+			 and upload_time=#{uploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullUploadTime!=null and isNotNullUploadTime==true">
+			 and upload_time is not null
+		</if>
+		<if test="isNotNullUploadTime!=null and isNotNullUploadTime==false">
+			 and upload_time is null
+		</if>
+		<if test="inUploadTime!=null">
+			 and upload_time in
+			<foreach collection="list" index="index" item="inUploadTime" open="(" separator="," close=")">
+				#{inUploadTime}
+			</foreach>
+		</if>
+		<if test="notInUploadTime!=null">
+			 and upload_time not in
+			<foreach collection="list" index="index" item="notInUploadTime" open="(" separator="," close=")">
+				#{notInUploadTime}
+			</foreach>
+		</if>
+		<if test="noEqualsUploadTime!=null">
+			 and upload_time<![CDATA[<>]]>#{noEqualsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUploadTime!=null">
+			 and upload_time=#{equalsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUploadTime!=null">
+			 and upload_time<![CDATA[>]]>#{greaterUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUploadTime!=null">
+			 and upload_time<![CDATA[>=]]>#{greaterEqualsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUploadTime!=null">
+			 and upload_time<![CDATA[<]]>#{lessUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUploadTime!=null">
+			 and upload_time<![CDATA[<=]]>#{lessEqualsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUploadTime!=null">
+			 and upload_time like "%"#{likeUploadTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUploadTime!=null">
+			 and upload_time like "%"#{leftLikeUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUploadTime!=null">
+			 and upload_time like #{rightLikeUploadTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="videoDesc!=null">
+			 and video_desc=#{videoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullVideoDesc!=null and isNotNullVideoDesc==true">
+			 and video_desc is not null
+		</if>
+		<if test="isNotNullVideoDesc!=null and isNotNullVideoDesc==false">
+			 and video_desc is null
+		</if>
+		<if test="inVideoDesc!=null">
+			 and video_desc in
+			<foreach collection="list" index="index" item="inVideoDesc" open="(" separator="," close=")">
+				#{inVideoDesc}
+			</foreach>
+		</if>
+		<if test="notInVideoDesc!=null">
+			 and video_desc not in
+			<foreach collection="list" index="index" item="notInVideoDesc" open="(" separator="," close=")">
+				#{notInVideoDesc}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoDesc!=null">
+			 and video_desc<![CDATA[<>]]>#{noEqualsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoDesc!=null">
+			 and video_desc=#{equalsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoDesc!=null">
+			 and video_desc<![CDATA[>]]>#{greaterVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoDesc!=null">
+			 and video_desc<![CDATA[>=]]>#{greaterEqualsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoDesc!=null">
+			 and video_desc<![CDATA[<]]>#{lessVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoDesc!=null">
+			 and video_desc<![CDATA[<=]]>#{lessEqualsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoDesc!=null">
+			 and video_desc like "%"#{likeVideoDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoDesc!=null">
+			 and video_desc like "%"#{leftLikeVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoDesc!=null">
+			 and video_desc like #{rightLikeVideoDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="videoFocus!=null">
+			 and video_focus=#{videoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullVideoFocus!=null and isNotNullVideoFocus==true">
+			 and video_focus is not null
+		</if>
+		<if test="isNotNullVideoFocus!=null and isNotNullVideoFocus==false">
+			 and video_focus is null
+		</if>
+		<if test="inVideoFocus!=null">
+			 and video_focus in
+			<foreach collection="list" index="index" item="inVideoFocus" open="(" separator="," close=")">
+				#{inVideoFocus}
+			</foreach>
+		</if>
+		<if test="notInVideoFocus!=null">
+			 and video_focus not in
+			<foreach collection="list" index="index" item="notInVideoFocus" open="(" separator="," close=")">
+				#{notInVideoFocus}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoFocus!=null">
+			 and video_focus<![CDATA[<>]]>#{noEqualsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoFocus!=null">
+			 and video_focus=#{equalsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoFocus!=null">
+			 and video_focus<![CDATA[>]]>#{greaterVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoFocus!=null">
+			 and video_focus<![CDATA[>=]]>#{greaterEqualsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoFocus!=null">
+			 and video_focus<![CDATA[<]]>#{lessVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoFocus!=null">
+			 and video_focus<![CDATA[<=]]>#{lessEqualsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoFocus!=null">
+			 and video_focus like "%"#{likeVideoFocus,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoFocus!=null">
+			 and video_focus like "%"#{leftLikeVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoFocus!=null">
+			 and video_focus like #{rightLikeVideoFocus,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="category!=null">
+			 and category=#{category,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCategory!=null and isNotNullCategory==true">
+			 and category is not null
+		</if>
+		<if test="isNotNullCategory!=null and isNotNullCategory==false">
+			 and category is null
+		</if>
+		<if test="inCategory!=null">
+			 and category in
+			<foreach collection="list" index="index" item="inCategory" open="(" separator="," close=")">
+				#{inCategory}
+			</foreach>
+		</if>
+		<if test="notInCategory!=null">
+			 and category not in
+			<foreach collection="list" index="index" item="notInCategory" open="(" separator="," close=")">
+				#{notInCategory}
+			</foreach>
+		</if>
+		<if test="noEqualsCategory!=null">
+			 and category<![CDATA[<>]]>#{noEqualsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCategory!=null">
+			 and category=#{equalsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCategory!=null">
+			 and category<![CDATA[>]]>#{greaterCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCategory!=null">
+			 and category<![CDATA[>=]]>#{greaterEqualsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCategory!=null">
+			 and category<![CDATA[<]]>#{lessCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCategory!=null">
+			 and category<![CDATA[<=]]>#{lessEqualsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCategory!=null">
+			 and category like "%"#{likeCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCategory!=null">
+			 and category like "%"#{leftLikeCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCategory!=null">
+			 and category like #{rightLikeCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="actor!=null">
+			 and actor=#{actor,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==true">
+			 and actor is not null
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==false">
+			 and actor is null
+		</if>
+		<if test="inActor!=null">
+			 and actor in
+			<foreach collection="list" index="index" item="inActor" open="(" separator="," close=")">
+				#{inActor}
+			</foreach>
+		</if>
+		<if test="notInActor!=null">
+			 and actor not in
+			<foreach collection="list" index="index" item="notInActor" open="(" separator="," close=")">
+				#{notInActor}
+			</foreach>
+		</if>
+		<if test="noEqualsActor!=null">
+			 and actor<![CDATA[<>]]>#{noEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsActor!=null">
+			 and actor=#{equalsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterActor!=null">
+			 and actor<![CDATA[>]]>#{greaterActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsActor!=null">
+			 and actor<![CDATA[>=]]>#{greaterEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessActor!=null">
+			 and actor<![CDATA[<]]>#{lessActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsActor!=null">
+			 and actor<![CDATA[<=]]>#{lessEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="likeActor!=null">
+			 and actor like "%"#{likeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeActor!=null">
+			 and actor like "%"#{leftLikeActor,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeActor!=null">
+			 and actor like #{rightLikeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="tag!=null">
+			 and tag=#{tag,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullTag!=null and isNotNullTag==true">
+			 and tag is not null
+		</if>
+		<if test="isNotNullTag!=null and isNotNullTag==false">
+			 and tag is null
+		</if>
+		<if test="inTag!=null">
+			 and tag in
+			<foreach collection="list" index="index" item="inTag" open="(" separator="," close=")">
+				#{inTag}
+			</foreach>
+		</if>
+		<if test="notInTag!=null">
+			 and tag not in
+			<foreach collection="list" index="index" item="notInTag" open="(" separator="," close=")">
+				#{notInTag}
+			</foreach>
+		</if>
+		<if test="noEqualsTag!=null">
+			 and tag<![CDATA[<>]]>#{noEqualsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsTag!=null">
+			 and tag=#{equalsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterTag!=null">
+			 and tag<![CDATA[>]]>#{greaterTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsTag!=null">
+			 and tag<![CDATA[>=]]>#{greaterEqualsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessTag!=null">
+			 and tag<![CDATA[<]]>#{lessTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsTag!=null">
+			 and tag<![CDATA[<=]]>#{lessEqualsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="likeTag!=null">
+			 and tag like "%"#{likeTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeTag!=null">
+			 and tag like "%"#{leftLikeTag,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeTag!=null">
+			 and tag like #{rightLikeTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="videoTime!=null">
+			 and video_time=#{videoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullVideoTime!=null and isNotNullVideoTime==true">
+			 and video_time is not null
+		</if>
+		<if test="isNotNullVideoTime!=null and isNotNullVideoTime==false">
+			 and video_time is null
+		</if>
+		<if test="inVideoTime!=null">
+			 and video_time in
+			<foreach collection="list" index="index" item="inVideoTime" open="(" separator="," close=")">
+				#{inVideoTime}
+			</foreach>
+		</if>
+		<if test="notInVideoTime!=null">
+			 and video_time not in
+			<foreach collection="list" index="index" item="notInVideoTime" open="(" separator="," close=")">
+				#{notInVideoTime}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoTime!=null">
+			 and video_time<![CDATA[<>]]>#{noEqualsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsVideoTime!=null">
+			 and video_time=#{equalsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterVideoTime!=null">
+			 and video_time<![CDATA[>]]>#{greaterVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsVideoTime!=null">
+			 and video_time<![CDATA[>=]]>#{greaterEqualsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="lessVideoTime!=null">
+			 and video_time<![CDATA[<]]>#{lessVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsVideoTime!=null">
+			 and video_time<![CDATA[<=]]>#{lessEqualsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="url!=null">
+			 and url=#{url,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==true">
+			 and url is not null
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==false">
+			 and url is null
+		</if>
+		<if test="inUrl!=null">
+			 and url in
+			<foreach collection="list" index="index" item="inUrl" open="(" separator="," close=")">
+				#{inUrl}
+			</foreach>
+		</if>
+		<if test="notInUrl!=null">
+			 and url not in
+			<foreach collection="list" index="index" item="notInUrl" open="(" separator="," close=")">
+				#{notInUrl}
+			</foreach>
+		</if>
+		<if test="noEqualsUrl!=null">
+			 and url<![CDATA[<>]]>#{noEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUrl!=null">
+			 and url=#{equalsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUrl!=null">
+			 and url<![CDATA[>]]>#{greaterUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUrl!=null">
+			 and url<![CDATA[>=]]>#{greaterEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUrl!=null">
+			 and url<![CDATA[<]]>#{lessUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUrl!=null">
+			 and url<![CDATA[<=]]>#{lessEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUrl!=null">
+			 and url like "%"#{likeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUrl!=null">
+			 and url like "%"#{leftLikeUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUrl!=null">
+			 and url like #{rightLikeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==true">
+			 and create_time is not null
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==false">
+			 and create_time is null
+		</if>
+		<if test="inCreateTime!=null">
+			 and create_time in
+			<foreach collection="list" index="index" item="inCreateTime" open="(" separator="," close=")">
+				#{inCreateTime}
+			</foreach>
+		</if>
+		<if test="notInCreateTime!=null">
+			 and create_time not in
+			<foreach collection="list" index="index" item="notInCreateTime" open="(" separator="," close=")">
+				#{notInCreateTime}
+			</foreach>
+		</if>
+		<if test="noEqualsCreateTime!=null">
+			 and create_time<![CDATA[<>]]>#{noEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCreateTime!=null">
+			 and create_time=#{equalsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCreateTime!=null">
+			 and create_time<![CDATA[>]]>#{greaterCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCreateTime!=null">
+			 and create_time<![CDATA[>=]]>#{greaterEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCreateTime!=null">
+			 and create_time<![CDATA[<]]>#{lessCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCreateTime!=null">
+			 and create_time<![CDATA[<=]]>#{lessEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCreateTime!=null">
+			 and create_time like "%"#{likeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCreateTime!=null">
+			 and create_time like "%"#{leftLikeCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCreateTime!=null">
+			 and create_time like #{rightLikeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoInfoCondition_WHERE">
+	<where>
+		<if test="videoId!=null">
+			 and video_id=#{videoId,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullVideoName!=null and isNotNullVideoName==true">
+			 and video_name is not null
+		</if>
+		<if test="isNotNullVideoName!=null and isNotNullVideoName==false">
+			 and video_name is null
+		</if>
+		<if test="inVideoName!=null">
+			 and video_name in
+			<foreach collection="list" index="index" item="inVideoName" open="(" separator="," close=")">
+				#{inVideoName}
+			</foreach>
+		</if>
+		<if test="notInVideoName!=null">
+			 and video_name not in
+			<foreach collection="list" index="index" item="notInVideoName" open="(" separator="," close=")">
+				#{notInVideoName}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoName!=null">
+			 and video_name<![CDATA[<>]]>#{noEqualsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoName!=null">
+			 and video_name=#{equalsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoName!=null">
+			 and video_name<![CDATA[>]]>#{greaterVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoName!=null">
+			 and video_name<![CDATA[>=]]>#{greaterEqualsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoName!=null">
+			 and video_name<![CDATA[<]]>#{lessVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoName!=null">
+			 and video_name<![CDATA[<=]]>#{lessEqualsVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoName!=null">
+			 and video_name like "%"#{likeVideoName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoName!=null">
+			 and video_name like "%"#{leftLikeVideoName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoName!=null">
+			 and video_name like #{rightLikeVideoName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullVideoSubName!=null and isNotNullVideoSubName==true">
+			 and video_sub_name is not null
+		</if>
+		<if test="isNotNullVideoSubName!=null and isNotNullVideoSubName==false">
+			 and video_sub_name is null
+		</if>
+		<if test="inVideoSubName!=null">
+			 and video_sub_name in
+			<foreach collection="list" index="index" item="inVideoSubName" open="(" separator="," close=")">
+				#{inVideoSubName}
+			</foreach>
+		</if>
+		<if test="notInVideoSubName!=null">
+			 and video_sub_name not in
+			<foreach collection="list" index="index" item="notInVideoSubName" open="(" separator="," close=")">
+				#{notInVideoSubName}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoSubName!=null">
+			 and video_sub_name<![CDATA[<>]]>#{noEqualsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoSubName!=null">
+			 and video_sub_name=#{equalsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoSubName!=null">
+			 and video_sub_name<![CDATA[>]]>#{greaterVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoSubName!=null">
+			 and video_sub_name<![CDATA[>=]]>#{greaterEqualsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoSubName!=null">
+			 and video_sub_name<![CDATA[<]]>#{lessVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoSubName!=null">
+			 and video_sub_name<![CDATA[<=]]>#{lessEqualsVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoSubName!=null">
+			 and video_sub_name like "%"#{likeVideoSubName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoSubName!=null">
+			 and video_sub_name like "%"#{leftLikeVideoSubName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoSubName!=null">
+			 and video_sub_name like #{rightLikeVideoSubName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCollectId!=null and isNotNullCollectId==true">
+			 and collect_id is not null
+		</if>
+		<if test="isNotNullCollectId!=null and isNotNullCollectId==false">
+			 and collect_id is null
+		</if>
+		<if test="inCollectId!=null">
+			 and collect_id in
+			<foreach collection="list" index="index" item="inCollectId" open="(" separator="," close=")">
+				#{inCollectId}
+			</foreach>
+		</if>
+		<if test="notInCollectId!=null">
+			 and collect_id not in
+			<foreach collection="list" index="index" item="notInCollectId" open="(" separator="," close=")">
+				#{notInCollectId}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectId!=null">
+			 and collect_id<![CDATA[<>]]>#{noEqualsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectId!=null">
+			 and collect_id=#{equalsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectId!=null">
+			 and collect_id<![CDATA[>]]>#{greaterCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectId!=null">
+			 and collect_id<![CDATA[>=]]>#{greaterEqualsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectId!=null">
+			 and collect_id<![CDATA[<]]>#{lessCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectId!=null">
+			 and collect_id<![CDATA[<=]]>#{lessEqualsCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectId!=null">
+			 and collect_id like "%"#{likeCollectId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectId!=null">
+			 and collect_id like "%"#{leftLikeCollectId,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectId!=null">
+			 and collect_id like #{rightLikeCollectId,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullUploadTime!=null and isNotNullUploadTime==true">
+			 and upload_time is not null
+		</if>
+		<if test="isNotNullUploadTime!=null and isNotNullUploadTime==false">
+			 and upload_time is null
+		</if>
+		<if test="inUploadTime!=null">
+			 and upload_time in
+			<foreach collection="list" index="index" item="inUploadTime" open="(" separator="," close=")">
+				#{inUploadTime}
+			</foreach>
+		</if>
+		<if test="notInUploadTime!=null">
+			 and upload_time not in
+			<foreach collection="list" index="index" item="notInUploadTime" open="(" separator="," close=")">
+				#{notInUploadTime}
+			</foreach>
+		</if>
+		<if test="noEqualsUploadTime!=null">
+			 and upload_time<![CDATA[<>]]>#{noEqualsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUploadTime!=null">
+			 and upload_time=#{equalsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUploadTime!=null">
+			 and upload_time<![CDATA[>]]>#{greaterUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUploadTime!=null">
+			 and upload_time<![CDATA[>=]]>#{greaterEqualsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUploadTime!=null">
+			 and upload_time<![CDATA[<]]>#{lessUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUploadTime!=null">
+			 and upload_time<![CDATA[<=]]>#{lessEqualsUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUploadTime!=null">
+			 and upload_time like "%"#{likeUploadTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUploadTime!=null">
+			 and upload_time like "%"#{leftLikeUploadTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUploadTime!=null">
+			 and upload_time like #{rightLikeUploadTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullVideoDesc!=null and isNotNullVideoDesc==true">
+			 and video_desc is not null
+		</if>
+		<if test="isNotNullVideoDesc!=null and isNotNullVideoDesc==false">
+			 and video_desc is null
+		</if>
+		<if test="inVideoDesc!=null">
+			 and video_desc in
+			<foreach collection="list" index="index" item="inVideoDesc" open="(" separator="," close=")">
+				#{inVideoDesc}
+			</foreach>
+		</if>
+		<if test="notInVideoDesc!=null">
+			 and video_desc not in
+			<foreach collection="list" index="index" item="notInVideoDesc" open="(" separator="," close=")">
+				#{notInVideoDesc}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoDesc!=null">
+			 and video_desc<![CDATA[<>]]>#{noEqualsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoDesc!=null">
+			 and video_desc=#{equalsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoDesc!=null">
+			 and video_desc<![CDATA[>]]>#{greaterVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoDesc!=null">
+			 and video_desc<![CDATA[>=]]>#{greaterEqualsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoDesc!=null">
+			 and video_desc<![CDATA[<]]>#{lessVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoDesc!=null">
+			 and video_desc<![CDATA[<=]]>#{lessEqualsVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoDesc!=null">
+			 and video_desc like "%"#{likeVideoDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoDesc!=null">
+			 and video_desc like "%"#{leftLikeVideoDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoDesc!=null">
+			 and video_desc like #{rightLikeVideoDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullVideoFocus!=null and isNotNullVideoFocus==true">
+			 and video_focus is not null
+		</if>
+		<if test="isNotNullVideoFocus!=null and isNotNullVideoFocus==false">
+			 and video_focus is null
+		</if>
+		<if test="inVideoFocus!=null">
+			 and video_focus in
+			<foreach collection="list" index="index" item="inVideoFocus" open="(" separator="," close=")">
+				#{inVideoFocus}
+			</foreach>
+		</if>
+		<if test="notInVideoFocus!=null">
+			 and video_focus not in
+			<foreach collection="list" index="index" item="notInVideoFocus" open="(" separator="," close=")">
+				#{notInVideoFocus}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoFocus!=null">
+			 and video_focus<![CDATA[<>]]>#{noEqualsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsVideoFocus!=null">
+			 and video_focus=#{equalsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterVideoFocus!=null">
+			 and video_focus<![CDATA[>]]>#{greaterVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsVideoFocus!=null">
+			 and video_focus<![CDATA[>=]]>#{greaterEqualsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="lessVideoFocus!=null">
+			 and video_focus<![CDATA[<]]>#{lessVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsVideoFocus!=null">
+			 and video_focus<![CDATA[<=]]>#{lessEqualsVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="likeVideoFocus!=null">
+			 and video_focus like "%"#{likeVideoFocus,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeVideoFocus!=null">
+			 and video_focus like "%"#{leftLikeVideoFocus,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeVideoFocus!=null">
+			 and video_focus like #{rightLikeVideoFocus,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCategory!=null and isNotNullCategory==true">
+			 and category is not null
+		</if>
+		<if test="isNotNullCategory!=null and isNotNullCategory==false">
+			 and category is null
+		</if>
+		<if test="inCategory!=null">
+			 and category in
+			<foreach collection="list" index="index" item="inCategory" open="(" separator="," close=")">
+				#{inCategory}
+			</foreach>
+		</if>
+		<if test="notInCategory!=null">
+			 and category not in
+			<foreach collection="list" index="index" item="notInCategory" open="(" separator="," close=")">
+				#{notInCategory}
+			</foreach>
+		</if>
+		<if test="noEqualsCategory!=null">
+			 and category<![CDATA[<>]]>#{noEqualsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCategory!=null">
+			 and category=#{equalsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCategory!=null">
+			 and category<![CDATA[>]]>#{greaterCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCategory!=null">
+			 and category<![CDATA[>=]]>#{greaterEqualsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCategory!=null">
+			 and category<![CDATA[<]]>#{lessCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCategory!=null">
+			 and category<![CDATA[<=]]>#{lessEqualsCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCategory!=null">
+			 and category like "%"#{likeCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCategory!=null">
+			 and category like "%"#{leftLikeCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCategory!=null">
+			 and category like #{rightLikeCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==true">
+			 and actor is not null
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==false">
+			 and actor is null
+		</if>
+		<if test="inActor!=null">
+			 and actor in
+			<foreach collection="list" index="index" item="inActor" open="(" separator="," close=")">
+				#{inActor}
+			</foreach>
+		</if>
+		<if test="notInActor!=null">
+			 and actor not in
+			<foreach collection="list" index="index" item="notInActor" open="(" separator="," close=")">
+				#{notInActor}
+			</foreach>
+		</if>
+		<if test="noEqualsActor!=null">
+			 and actor<![CDATA[<>]]>#{noEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsActor!=null">
+			 and actor=#{equalsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterActor!=null">
+			 and actor<![CDATA[>]]>#{greaterActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsActor!=null">
+			 and actor<![CDATA[>=]]>#{greaterEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessActor!=null">
+			 and actor<![CDATA[<]]>#{lessActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsActor!=null">
+			 and actor<![CDATA[<=]]>#{lessEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="likeActor!=null">
+			 and actor like "%"#{likeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeActor!=null">
+			 and actor like "%"#{leftLikeActor,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeActor!=null">
+			 and actor like #{rightLikeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullTag!=null and isNotNullTag==true">
+			 and tag is not null
+		</if>
+		<if test="isNotNullTag!=null and isNotNullTag==false">
+			 and tag is null
+		</if>
+		<if test="inTag!=null">
+			 and tag in
+			<foreach collection="list" index="index" item="inTag" open="(" separator="," close=")">
+				#{inTag}
+			</foreach>
+		</if>
+		<if test="notInTag!=null">
+			 and tag not in
+			<foreach collection="list" index="index" item="notInTag" open="(" separator="," close=")">
+				#{notInTag}
+			</foreach>
+		</if>
+		<if test="noEqualsTag!=null">
+			 and tag<![CDATA[<>]]>#{noEqualsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsTag!=null">
+			 and tag=#{equalsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterTag!=null">
+			 and tag<![CDATA[>]]>#{greaterTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsTag!=null">
+			 and tag<![CDATA[>=]]>#{greaterEqualsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessTag!=null">
+			 and tag<![CDATA[<]]>#{lessTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsTag!=null">
+			 and tag<![CDATA[<=]]>#{lessEqualsTag,jdbcType=VARCHAR}
+		</if>
+		<if test="likeTag!=null">
+			 and tag like "%"#{likeTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeTag!=null">
+			 and tag like "%"#{leftLikeTag,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeTag!=null">
+			 and tag like #{rightLikeTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullVideoTime!=null and isNotNullVideoTime==true">
+			 and video_time is not null
+		</if>
+		<if test="isNotNullVideoTime!=null and isNotNullVideoTime==false">
+			 and video_time is null
+		</if>
+		<if test="inVideoTime!=null">
+			 and video_time in
+			<foreach collection="list" index="index" item="inVideoTime" open="(" separator="," close=")">
+				#{inVideoTime}
+			</foreach>
+		</if>
+		<if test="notInVideoTime!=null">
+			 and video_time not in
+			<foreach collection="list" index="index" item="notInVideoTime" open="(" separator="," close=")">
+				#{notInVideoTime}
+			</foreach>
+		</if>
+		<if test="noEqualsVideoTime!=null">
+			 and video_time<![CDATA[<>]]>#{noEqualsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsVideoTime!=null">
+			 and video_time=#{equalsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterVideoTime!=null">
+			 and video_time<![CDATA[>]]>#{greaterVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsVideoTime!=null">
+			 and video_time<![CDATA[>=]]>#{greaterEqualsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="lessVideoTime!=null">
+			 and video_time<![CDATA[<]]>#{lessVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsVideoTime!=null">
+			 and video_time<![CDATA[<=]]>#{lessEqualsVideoTime,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==true">
+			 and url is not null
+		</if>
+		<if test="isNotNullUrl!=null and isNotNullUrl==false">
+			 and url is null
+		</if>
+		<if test="inUrl!=null">
+			 and url in
+			<foreach collection="list" index="index" item="inUrl" open="(" separator="," close=")">
+				#{inUrl}
+			</foreach>
+		</if>
+		<if test="notInUrl!=null">
+			 and url not in
+			<foreach collection="list" index="index" item="notInUrl" open="(" separator="," close=")">
+				#{notInUrl}
+			</foreach>
+		</if>
+		<if test="noEqualsUrl!=null">
+			 and url<![CDATA[<>]]>#{noEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsUrl!=null">
+			 and url=#{equalsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterUrl!=null">
+			 and url<![CDATA[>]]>#{greaterUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsUrl!=null">
+			 and url<![CDATA[>=]]>#{greaterEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessUrl!=null">
+			 and url<![CDATA[<]]>#{lessUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsUrl!=null">
+			 and url<![CDATA[<=]]>#{lessEqualsUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="likeUrl!=null">
+			 and url like "%"#{likeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeUrl!=null">
+			 and url like "%"#{leftLikeUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeUrl!=null">
+			 and url like #{rightLikeUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==true">
+			 and create_time is not null
+		</if>
+		<if test="isNotNullCreateTime!=null and isNotNullCreateTime==false">
+			 and create_time is null
+		</if>
+		<if test="inCreateTime!=null">
+			 and create_time in
+			<foreach collection="list" index="index" item="inCreateTime" open="(" separator="," close=")">
+				#{inCreateTime}
+			</foreach>
+		</if>
+		<if test="notInCreateTime!=null">
+			 and create_time not in
+			<foreach collection="list" index="index" item="notInCreateTime" open="(" separator="," close=")">
+				#{notInCreateTime}
+			</foreach>
+		</if>
+		<if test="noEqualsCreateTime!=null">
+			 and create_time<![CDATA[<>]]>#{noEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCreateTime!=null">
+			 and create_time=#{equalsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCreateTime!=null">
+			 and create_time<![CDATA[>]]>#{greaterCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCreateTime!=null">
+			 and create_time<![CDATA[>=]]>#{greaterEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCreateTime!=null">
+			 and create_time<![CDATA[<]]>#{lessCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCreateTime!=null">
+			 and create_time<![CDATA[<=]]>#{lessEqualsCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCreateTime!=null">
+			 and create_time like "%"#{likeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCreateTime!=null">
+			 and create_time like "%"#{leftLikeCreateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCreateTime!=null">
+			 and create_time like #{rightLikeCreateTime,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoInfo_UPDATE">
+	<set>
+		<if test="videoId!=null">
+			video_id=#{videoId,jdbcType=VARCHAR},
+		</if>
+		<if test="videoName!=null">
+			video_name=#{videoName,jdbcType=VARCHAR},
+		</if>
+		<if test="videoSubName!=null">
+			video_sub_name=#{videoSubName,jdbcType=VARCHAR},
+		</if>
+		<if test="collectId!=null">
+			collect_id=#{collectId,jdbcType=VARCHAR},
+		</if>
+		<if test="uploadTime!=null">
+			upload_time=#{uploadTime,jdbcType=VARCHAR},
+		</if>
+		<if test="videoDesc!=null">
+			video_desc=#{videoDesc,jdbcType=VARCHAR},
+		</if>
+		<if test="videoFocus!=null">
+			video_focus=#{videoFocus,jdbcType=VARCHAR},
+		</if>
+		<if test="category!=null">
+			category=#{category,jdbcType=VARCHAR},
+		</if>
+		<if test="actor!=null">
+			actor=#{actor,jdbcType=VARCHAR},
+		</if>
+		<if test="tag!=null">
+			tag=#{tag,jdbcType=VARCHAR},
+		</if>
+		<if test="videoTime!=null">
+			video_time=#{videoTime,jdbcType=NUMERIC},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+		<if test="url!=null">
+			url=#{url,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime!=null">
+			create_time=#{createTime,jdbcType=VARCHAR},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertVideoInfo" parameterType="VideoInfo" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_video_info (video_id,video_name,video_sub_name,collect_id,upload_time,video_desc,video_focus,category,actor,tag,video_time,site,url,create_time) VALUES (#{videoId},#{videoName},#{videoSubName},#{collectId},#{uploadTime},#{videoDesc},#{videoFocus},#{category},#{actor},#{tag},#{videoTime},#{site},#{url},#{createTime})
+		]]>
+    </insert>
+    <update id="update_VideoInfo" parameterType="VideoInfo" flushCache="true">
+    	<![CDATA[UPDATE t_video_info SET video_id=#{videoId,jdbcType=VARCHAR},,video_name=#{videoName,jdbcType=VARCHAR},,video_sub_name=#{videoSubName,jdbcType=VARCHAR},,collect_id=#{collectId,jdbcType=VARCHAR},,upload_time=#{uploadTime,jdbcType=VARCHAR},,video_desc=#{videoDesc,jdbcType=VARCHAR},,video_focus=#{videoFocus,jdbcType=VARCHAR},,category=#{category,jdbcType=VARCHAR},,actor=#{actor,jdbcType=VARCHAR},,tag=#{tag,jdbcType=VARCHAR},,video_time=#{videoTime,jdbcType=NUMERIC},,site=#{site,jdbcType=NUMERIC},,url=#{url,jdbcType=VARCHAR},,create_time=#{createTime,jdbcType=VARCHAR}, WHERE video_id=#{videoId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+    <update id="updateVideoInfoByExample" parameterType="VideoInfo" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_video_info
+    	]]>
+    	<include refid="VideoInfo_UPDATE" />
+    	<![CDATA[WHERE video_id=#{videoId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+  	<update id="updateVideoInfoByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_video_info ${value}
+    	]]>
+  	</update>
+  	<update id="updateVideoInfoByCondition" parameterType="cn.com.paladintyrion.client.search.VideoInfoSearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_video_info]]>
+    	<include refid="VideoInfo_UPDATE" />
+    	<include refid="VideoInfoCondition_WHERE" />
+  	</update>
+  	<delete id="deleteVideoInfoByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_video_info ${value}]]>
+  	</delete>
+  	<delete id="deleteVideoInfoByExample" parameterType="VideoInfo" flushCache="true">
+    	<![CDATA[DELETE FROM t_video_info]]>
+    	<include refid="VideoInfo_WHERE" />
+  	</delete>
+  	<delete id="deleteVideoInfoByCondition" parameterType="cn.com.paladintyrion.client.search.VideoInfoSearchBean" flushCache="true">
+    	<![CDATA[delete from t_video_info]]>
+    	<include refid="VideoInfoSearchBean_WHERE" />
+  	</delete>
+  	<select id="getVideoInfoByWhere" parameterType="java.lang.String" resultType="VideoInfo" resultMap="t_video_infoMap">
+    	<![CDATA[SELECT * FROM t_video_info ${value}]]>
+  	</select>
+  	<select id="getVideoInfoByExample" parameterType="VideoInfo" resultType="VideoInfo" resultMap="t_video_infoMap">  
+        <![CDATA[
+			SELECT * FROM t_video_info
+		]]>
+        <include refid="VideoInfo_WHERE" />
+    </select>
+    <select id="getVideoInfoByCondition" parameterType="cn.com.paladintyrion.client.search.VideoInfoSearchBean" resultType="VideoInfo" resultMap="t_video_infoMap">
+    	<![CDATA[SELECT * FROM t_video_info]]>
+    	<include refid="VideoInfoSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getVideoInfoListByWhere" parameterType="java.lang.String" resultType="VideoInfo" resultMap="t_video_infoMap">
+    	<![CDATA[SELECT * FROM t_video_info ${sql}]]>
+  	</select>
+  	<select id="getVideoInfoListByCondition" parameterType="cn.com.paladintyrion.client.search.VideoInfoSearchBean" resultType="VideoInfo" resultMap="t_video_infoMap">
+    	<![CDATA[SELECT * FROM t_video_info]]>
+    	<include refid="VideoInfoSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getVideoInfoCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_info ${value}]]>
+  	</select>
+  	<select id="getVideoInfoCountByExample" parameterType="VideoInfo" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_info]]>
+    	<include refid="VideoInfo_WHERE" />
+  	</select>
+  	<select id="getVideoInfoCountByCondition" parameterType="cn.com.paladintyrion.client.search.VideoInfoSearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_info]]>
+    	<include refid="VideoInfoSearchBean_WHERE" />
+  	</select>
+  	<select id="getVideoInfoColumnByCondition" parameterType="cn.com.paladintyrion.client.search.VideoInfoSearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT ${columnSql} FROM t_video_info]]>
+    	<include refid="VideoInfoSearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

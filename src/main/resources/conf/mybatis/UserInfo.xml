@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.UserInfoDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="UserInfo" id="t_user_infoMap">
+      	<result property="userId" column="user_id" />
+		<result property="site" column="site" />
+		<result property="nickName" column="nick_name" />
+		<result property="gender" column="gender" />
+		<result property="age" column="age" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="headerPic" column="header_pic" />
+		<result property="profileUrl" column="profile_url" />
+  	</resultMap>
+  	<sql id="UserInfo_WHERE">
+	<where>
+		<if test="userId!=null">
+			 and user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="nickName!=null">
+			 and nick_name=#{nickName,jdbcType=VARCHAR}
+		</if>
+		<if test="gender!=null">
+			 and gender=#{gender,jdbcType=NUMERIC}
+		</if>
+		<if test="age!=null">
+			 and age=#{age,jdbcType=NUMERIC}
+		</if>
+		<if test="province!=null">
+			 and province=#{province,jdbcType=VARCHAR}
+		</if>
+		<if test="city!=null">
+			 and city=#{city,jdbcType=VARCHAR}
+		</if>
+		<if test="headerPic!=null">
+			 and header_pic=#{headerPic,jdbcType=VARCHAR}
+		</if>
+		<if test="profileUrl!=null">
+			 and profile_url=#{profileUrl,jdbcType=VARCHAR}
+		</if>
+	</where>
+  </sql>
+  <sql id="UserInfoSearchBean_WHERE">
+	<where>
+		<if test="userId!=null">
+			 and user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="nickName!=null">
+			 and nick_name=#{nickName,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullNickName!=null and isNotNullNickName==true">
+			 and nick_name is not null
+		</if>
+		<if test="isNotNullNickName!=null and isNotNullNickName==false">
+			 and nick_name is null
+		</if>
+		<if test="inNickName!=null">
+			 and nick_name in
+			<foreach collection="list" index="index" item="inNickName" open="(" separator="," close=")">
+				#{inNickName}
+			</foreach>
+		</if>
+		<if test="notInNickName!=null">
+			 and nick_name not in
+			<foreach collection="list" index="index" item="notInNickName" open="(" separator="," close=")">
+				#{notInNickName}
+			</foreach>
+		</if>
+		<if test="noEqualsNickName!=null">
+			 and nick_name<![CDATA[<>]]>#{noEqualsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsNickName!=null">
+			 and nick_name=#{equalsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterNickName!=null">
+			 and nick_name<![CDATA[>]]>#{greaterNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsNickName!=null">
+			 and nick_name<![CDATA[>=]]>#{greaterEqualsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessNickName!=null">
+			 and nick_name<![CDATA[<]]>#{lessNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsNickName!=null">
+			 and nick_name<![CDATA[<=]]>#{lessEqualsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeNickName!=null">
+			 and nick_name like "%"#{likeNickName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeNickName!=null">
+			 and nick_name like "%"#{leftLikeNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeNickName!=null">
+			 and nick_name like #{rightLikeNickName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="gender!=null">
+			 and gender=#{gender,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullGender!=null and isNotNullGender==true">
+			 and gender is not null
+		</if>
+		<if test="isNotNullGender!=null and isNotNullGender==false">
+			 and gender is null
+		</if>
+		<if test="inGender!=null">
+			 and gender in
+			<foreach collection="list" index="index" item="inGender" open="(" separator="," close=")">
+				#{inGender}
+			</foreach>
+		</if>
+		<if test="notInGender!=null">
+			 and gender not in
+			<foreach collection="list" index="index" item="notInGender" open="(" separator="," close=")">
+				#{notInGender}
+			</foreach>
+		</if>
+		<if test="noEqualsGender!=null">
+			 and gender<![CDATA[<>]]>#{noEqualsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsGender!=null">
+			 and gender=#{equalsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterGender!=null">
+			 and gender<![CDATA[>]]>#{greaterGender,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsGender!=null">
+			 and gender<![CDATA[>=]]>#{greaterEqualsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="lessGender!=null">
+			 and gender<![CDATA[<]]>#{lessGender,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsGender!=null">
+			 and gender<![CDATA[<=]]>#{lessEqualsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="age!=null">
+			 and age=#{age,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullAge!=null and isNotNullAge==true">
+			 and age is not null
+		</if>
+		<if test="isNotNullAge!=null and isNotNullAge==false">
+			 and age is null
+		</if>
+		<if test="inAge!=null">
+			 and age in
+			<foreach collection="list" index="index" item="inAge" open="(" separator="," close=")">
+				#{inAge}
+			</foreach>
+		</if>
+		<if test="notInAge!=null">
+			 and age not in
+			<foreach collection="list" index="index" item="notInAge" open="(" separator="," close=")">
+				#{notInAge}
+			</foreach>
+		</if>
+		<if test="noEqualsAge!=null">
+			 and age<![CDATA[<>]]>#{noEqualsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsAge!=null">
+			 and age=#{equalsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterAge!=null">
+			 and age<![CDATA[>]]>#{greaterAge,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsAge!=null">
+			 and age<![CDATA[>=]]>#{greaterEqualsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="lessAge!=null">
+			 and age<![CDATA[<]]>#{lessAge,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsAge!=null">
+			 and age<![CDATA[<=]]>#{lessEqualsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="province!=null">
+			 and province=#{province,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullProvince!=null and isNotNullProvince==true">
+			 and province is not null
+		</if>
+		<if test="isNotNullProvince!=null and isNotNullProvince==false">
+			 and province is null
+		</if>
+		<if test="inProvince!=null">
+			 and province in
+			<foreach collection="list" index="index" item="inProvince" open="(" separator="," close=")">
+				#{inProvince}
+			</foreach>
+		</if>
+		<if test="notInProvince!=null">
+			 and province not in
+			<foreach collection="list" index="index" item="notInProvince" open="(" separator="," close=")">
+				#{notInProvince}
+			</foreach>
+		</if>
+		<if test="noEqualsProvince!=null">
+			 and province<![CDATA[<>]]>#{noEqualsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsProvince!=null">
+			 and province=#{equalsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterProvince!=null">
+			 and province<![CDATA[>]]>#{greaterProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsProvince!=null">
+			 and province<![CDATA[>=]]>#{greaterEqualsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="lessProvince!=null">
+			 and province<![CDATA[<]]>#{lessProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsProvince!=null">
+			 and province<![CDATA[<=]]>#{lessEqualsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="likeProvince!=null">
+			 and province like "%"#{likeProvince,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeProvince!=null">
+			 and province like "%"#{leftLikeProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeProvince!=null">
+			 and province like #{rightLikeProvince,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="city!=null">
+			 and city=#{city,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCity!=null and isNotNullCity==true">
+			 and city is not null
+		</if>
+		<if test="isNotNullCity!=null and isNotNullCity==false">
+			 and city is null
+		</if>
+		<if test="inCity!=null">
+			 and city in
+			<foreach collection="list" index="index" item="inCity" open="(" separator="," close=")">
+				#{inCity}
+			</foreach>
+		</if>
+		<if test="notInCity!=null">
+			 and city not in
+			<foreach collection="list" index="index" item="notInCity" open="(" separator="," close=")">
+				#{notInCity}
+			</foreach>
+		</if>
+		<if test="noEqualsCity!=null">
+			 and city<![CDATA[<>]]>#{noEqualsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCity!=null">
+			 and city=#{equalsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCity!=null">
+			 and city<![CDATA[>]]>#{greaterCity,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCity!=null">
+			 and city<![CDATA[>=]]>#{greaterEqualsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCity!=null">
+			 and city<![CDATA[<]]>#{lessCity,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCity!=null">
+			 and city<![CDATA[<=]]>#{lessEqualsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCity!=null">
+			 and city like "%"#{likeCity,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCity!=null">
+			 and city like "%"#{leftLikeCity,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCity!=null">
+			 and city like #{rightLikeCity,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="headerPic!=null">
+			 and header_pic=#{headerPic,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullHeaderPic!=null and isNotNullHeaderPic==true">
+			 and header_pic is not null
+		</if>
+		<if test="isNotNullHeaderPic!=null and isNotNullHeaderPic==false">
+			 and header_pic is null
+		</if>
+		<if test="inHeaderPic!=null">
+			 and header_pic in
+			<foreach collection="list" index="index" item="inHeaderPic" open="(" separator="," close=")">
+				#{inHeaderPic}
+			</foreach>
+		</if>
+		<if test="notInHeaderPic!=null">
+			 and header_pic not in
+			<foreach collection="list" index="index" item="notInHeaderPic" open="(" separator="," close=")">
+				#{notInHeaderPic}
+			</foreach>
+		</if>
+		<if test="noEqualsHeaderPic!=null">
+			 and header_pic<![CDATA[<>]]>#{noEqualsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsHeaderPic!=null">
+			 and header_pic=#{equalsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterHeaderPic!=null">
+			 and header_pic<![CDATA[>]]>#{greaterHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsHeaderPic!=null">
+			 and header_pic<![CDATA[>=]]>#{greaterEqualsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="lessHeaderPic!=null">
+			 and header_pic<![CDATA[<]]>#{lessHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsHeaderPic!=null">
+			 and header_pic<![CDATA[<=]]>#{lessEqualsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="likeHeaderPic!=null">
+			 and header_pic like "%"#{likeHeaderPic,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeHeaderPic!=null">
+			 and header_pic like "%"#{leftLikeHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeHeaderPic!=null">
+			 and header_pic like #{rightLikeHeaderPic,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="profileUrl!=null">
+			 and profile_url=#{profileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullProfileUrl!=null and isNotNullProfileUrl==true">
+			 and profile_url is not null
+		</if>
+		<if test="isNotNullProfileUrl!=null and isNotNullProfileUrl==false">
+			 and profile_url is null
+		</if>
+		<if test="inProfileUrl!=null">
+			 and profile_url in
+			<foreach collection="list" index="index" item="inProfileUrl" open="(" separator="," close=")">
+				#{inProfileUrl}
+			</foreach>
+		</if>
+		<if test="notInProfileUrl!=null">
+			 and profile_url not in
+			<foreach collection="list" index="index" item="notInProfileUrl" open="(" separator="," close=")">
+				#{notInProfileUrl}
+			</foreach>
+		</if>
+		<if test="noEqualsProfileUrl!=null">
+			 and profile_url<![CDATA[<>]]>#{noEqualsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsProfileUrl!=null">
+			 and profile_url=#{equalsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterProfileUrl!=null">
+			 and profile_url<![CDATA[>]]>#{greaterProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsProfileUrl!=null">
+			 and profile_url<![CDATA[>=]]>#{greaterEqualsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessProfileUrl!=null">
+			 and profile_url<![CDATA[<]]>#{lessProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsProfileUrl!=null">
+			 and profile_url<![CDATA[<=]]>#{lessEqualsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="likeProfileUrl!=null">
+			 and profile_url like "%"#{likeProfileUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeProfileUrl!=null">
+			 and profile_url like "%"#{leftLikeProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeProfileUrl!=null">
+			 and profile_url like #{rightLikeProfileUrl,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="UserInfoCondition_WHERE">
+	<where>
+		<if test="userId!=null">
+			 and user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullNickName!=null and isNotNullNickName==true">
+			 and nick_name is not null
+		</if>
+		<if test="isNotNullNickName!=null and isNotNullNickName==false">
+			 and nick_name is null
+		</if>
+		<if test="inNickName!=null">
+			 and nick_name in
+			<foreach collection="list" index="index" item="inNickName" open="(" separator="," close=")">
+				#{inNickName}
+			</foreach>
+		</if>
+		<if test="notInNickName!=null">
+			 and nick_name not in
+			<foreach collection="list" index="index" item="notInNickName" open="(" separator="," close=")">
+				#{notInNickName}
+			</foreach>
+		</if>
+		<if test="noEqualsNickName!=null">
+			 and nick_name<![CDATA[<>]]>#{noEqualsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsNickName!=null">
+			 and nick_name=#{equalsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterNickName!=null">
+			 and nick_name<![CDATA[>]]>#{greaterNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsNickName!=null">
+			 and nick_name<![CDATA[>=]]>#{greaterEqualsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessNickName!=null">
+			 and nick_name<![CDATA[<]]>#{lessNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsNickName!=null">
+			 and nick_name<![CDATA[<=]]>#{lessEqualsNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeNickName!=null">
+			 and nick_name like "%"#{likeNickName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeNickName!=null">
+			 and nick_name like "%"#{leftLikeNickName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeNickName!=null">
+			 and nick_name like #{rightLikeNickName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullGender!=null and isNotNullGender==true">
+			 and gender is not null
+		</if>
+		<if test="isNotNullGender!=null and isNotNullGender==false">
+			 and gender is null
+		</if>
+		<if test="inGender!=null">
+			 and gender in
+			<foreach collection="list" index="index" item="inGender" open="(" separator="," close=")">
+				#{inGender}
+			</foreach>
+		</if>
+		<if test="notInGender!=null">
+			 and gender not in
+			<foreach collection="list" index="index" item="notInGender" open="(" separator="," close=")">
+				#{notInGender}
+			</foreach>
+		</if>
+		<if test="noEqualsGender!=null">
+			 and gender<![CDATA[<>]]>#{noEqualsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsGender!=null">
+			 and gender=#{equalsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterGender!=null">
+			 and gender<![CDATA[>]]>#{greaterGender,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsGender!=null">
+			 and gender<![CDATA[>=]]>#{greaterEqualsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="lessGender!=null">
+			 and gender<![CDATA[<]]>#{lessGender,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsGender!=null">
+			 and gender<![CDATA[<=]]>#{lessEqualsGender,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullAge!=null and isNotNullAge==true">
+			 and age is not null
+		</if>
+		<if test="isNotNullAge!=null and isNotNullAge==false">
+			 and age is null
+		</if>
+		<if test="inAge!=null">
+			 and age in
+			<foreach collection="list" index="index" item="inAge" open="(" separator="," close=")">
+				#{inAge}
+			</foreach>
+		</if>
+		<if test="notInAge!=null">
+			 and age not in
+			<foreach collection="list" index="index" item="notInAge" open="(" separator="," close=")">
+				#{notInAge}
+			</foreach>
+		</if>
+		<if test="noEqualsAge!=null">
+			 and age<![CDATA[<>]]>#{noEqualsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsAge!=null">
+			 and age=#{equalsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterAge!=null">
+			 and age<![CDATA[>]]>#{greaterAge,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsAge!=null">
+			 and age<![CDATA[>=]]>#{greaterEqualsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="lessAge!=null">
+			 and age<![CDATA[<]]>#{lessAge,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsAge!=null">
+			 and age<![CDATA[<=]]>#{lessEqualsAge,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullProvince!=null and isNotNullProvince==true">
+			 and province is not null
+		</if>
+		<if test="isNotNullProvince!=null and isNotNullProvince==false">
+			 and province is null
+		</if>
+		<if test="inProvince!=null">
+			 and province in
+			<foreach collection="list" index="index" item="inProvince" open="(" separator="," close=")">
+				#{inProvince}
+			</foreach>
+		</if>
+		<if test="notInProvince!=null">
+			 and province not in
+			<foreach collection="list" index="index" item="notInProvince" open="(" separator="," close=")">
+				#{notInProvince}
+			</foreach>
+		</if>
+		<if test="noEqualsProvince!=null">
+			 and province<![CDATA[<>]]>#{noEqualsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsProvince!=null">
+			 and province=#{equalsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterProvince!=null">
+			 and province<![CDATA[>]]>#{greaterProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsProvince!=null">
+			 and province<![CDATA[>=]]>#{greaterEqualsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="lessProvince!=null">
+			 and province<![CDATA[<]]>#{lessProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsProvince!=null">
+			 and province<![CDATA[<=]]>#{lessEqualsProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="likeProvince!=null">
+			 and province like "%"#{likeProvince,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeProvince!=null">
+			 and province like "%"#{leftLikeProvince,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeProvince!=null">
+			 and province like #{rightLikeProvince,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCity!=null and isNotNullCity==true">
+			 and city is not null
+		</if>
+		<if test="isNotNullCity!=null and isNotNullCity==false">
+			 and city is null
+		</if>
+		<if test="inCity!=null">
+			 and city in
+			<foreach collection="list" index="index" item="inCity" open="(" separator="," close=")">
+				#{inCity}
+			</foreach>
+		</if>
+		<if test="notInCity!=null">
+			 and city not in
+			<foreach collection="list" index="index" item="notInCity" open="(" separator="," close=")">
+				#{notInCity}
+			</foreach>
+		</if>
+		<if test="noEqualsCity!=null">
+			 and city<![CDATA[<>]]>#{noEqualsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCity!=null">
+			 and city=#{equalsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCity!=null">
+			 and city<![CDATA[>]]>#{greaterCity,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCity!=null">
+			 and city<![CDATA[>=]]>#{greaterEqualsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCity!=null">
+			 and city<![CDATA[<]]>#{lessCity,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCity!=null">
+			 and city<![CDATA[<=]]>#{lessEqualsCity,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCity!=null">
+			 and city like "%"#{likeCity,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCity!=null">
+			 and city like "%"#{leftLikeCity,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCity!=null">
+			 and city like #{rightLikeCity,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullHeaderPic!=null and isNotNullHeaderPic==true">
+			 and header_pic is not null
+		</if>
+		<if test="isNotNullHeaderPic!=null and isNotNullHeaderPic==false">
+			 and header_pic is null
+		</if>
+		<if test="inHeaderPic!=null">
+			 and header_pic in
+			<foreach collection="list" index="index" item="inHeaderPic" open="(" separator="," close=")">
+				#{inHeaderPic}
+			</foreach>
+		</if>
+		<if test="notInHeaderPic!=null">
+			 and header_pic not in
+			<foreach collection="list" index="index" item="notInHeaderPic" open="(" separator="," close=")">
+				#{notInHeaderPic}
+			</foreach>
+		</if>
+		<if test="noEqualsHeaderPic!=null">
+			 and header_pic<![CDATA[<>]]>#{noEqualsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsHeaderPic!=null">
+			 and header_pic=#{equalsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterHeaderPic!=null">
+			 and header_pic<![CDATA[>]]>#{greaterHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsHeaderPic!=null">
+			 and header_pic<![CDATA[>=]]>#{greaterEqualsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="lessHeaderPic!=null">
+			 and header_pic<![CDATA[<]]>#{lessHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsHeaderPic!=null">
+			 and header_pic<![CDATA[<=]]>#{lessEqualsHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="likeHeaderPic!=null">
+			 and header_pic like "%"#{likeHeaderPic,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeHeaderPic!=null">
+			 and header_pic like "%"#{leftLikeHeaderPic,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeHeaderPic!=null">
+			 and header_pic like #{rightLikeHeaderPic,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullProfileUrl!=null and isNotNullProfileUrl==true">
+			 and profile_url is not null
+		</if>
+		<if test="isNotNullProfileUrl!=null and isNotNullProfileUrl==false">
+			 and profile_url is null
+		</if>
+		<if test="inProfileUrl!=null">
+			 and profile_url in
+			<foreach collection="list" index="index" item="inProfileUrl" open="(" separator="," close=")">
+				#{inProfileUrl}
+			</foreach>
+		</if>
+		<if test="notInProfileUrl!=null">
+			 and profile_url not in
+			<foreach collection="list" index="index" item="notInProfileUrl" open="(" separator="," close=")">
+				#{notInProfileUrl}
+			</foreach>
+		</if>
+		<if test="noEqualsProfileUrl!=null">
+			 and profile_url<![CDATA[<>]]>#{noEqualsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsProfileUrl!=null">
+			 and profile_url=#{equalsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterProfileUrl!=null">
+			 and profile_url<![CDATA[>]]>#{greaterProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsProfileUrl!=null">
+			 and profile_url<![CDATA[>=]]>#{greaterEqualsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessProfileUrl!=null">
+			 and profile_url<![CDATA[<]]>#{lessProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsProfileUrl!=null">
+			 and profile_url<![CDATA[<=]]>#{lessEqualsProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="likeProfileUrl!=null">
+			 and profile_url like "%"#{likeProfileUrl,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeProfileUrl!=null">
+			 and profile_url like "%"#{leftLikeProfileUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeProfileUrl!=null">
+			 and profile_url like #{rightLikeProfileUrl,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="UserInfo_UPDATE">
+	<set>
+		<if test="userId!=null">
+			user_id=#{userId,jdbcType=VARCHAR},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+		<if test="nickName!=null">
+			nick_name=#{nickName,jdbcType=VARCHAR},
+		</if>
+		<if test="gender!=null">
+			gender=#{gender,jdbcType=NUMERIC},
+		</if>
+		<if test="age!=null">
+			age=#{age,jdbcType=NUMERIC},
+		</if>
+		<if test="province!=null">
+			province=#{province,jdbcType=VARCHAR},
+		</if>
+		<if test="city!=null">
+			city=#{city,jdbcType=VARCHAR},
+		</if>
+		<if test="headerPic!=null">
+			header_pic=#{headerPic,jdbcType=VARCHAR},
+		</if>
+		<if test="profileUrl!=null">
+			profile_url=#{profileUrl,jdbcType=VARCHAR},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertUserInfo" parameterType="UserInfo" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_user_info (user_id,site,nick_name,gender,age,province,city,header_pic,profile_url) VALUES (#{userId},#{site},#{nickName},#{gender},#{age},#{province},#{city},#{headerPic},#{profileUrl})
+		]]>
+    </insert>
+    <update id="update_UserInfo" parameterType="UserInfo" flushCache="true">
+    	<![CDATA[UPDATE t_user_info SET user_id=#{userId,jdbcType=VARCHAR},,site=#{site,jdbcType=NUMERIC},,nick_name=#{nickName,jdbcType=VARCHAR},,gender=#{gender,jdbcType=NUMERIC},,age=#{age,jdbcType=NUMERIC},,province=#{province,jdbcType=VARCHAR},,city=#{city,jdbcType=VARCHAR},,header_pic=#{headerPic,jdbcType=VARCHAR},,profile_url=#{profileUrl,jdbcType=VARCHAR}, WHERE user_id=#{userId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+    <update id="updateUserInfoByExample" parameterType="UserInfo" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_user_info
+    	]]>
+    	<include refid="UserInfo_UPDATE" />
+    	<![CDATA[WHERE user_id=#{userId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+  	<update id="updateUserInfoByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_user_info ${value}
+    	]]>
+  	</update>
+  	<update id="updateUserInfoByCondition" parameterType="cn.com.paladintyrion.client.search.UserInfoSearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_user_info]]>
+    	<include refid="UserInfo_UPDATE" />
+    	<include refid="UserInfoCondition_WHERE" />
+  	</update>
+  	<delete id="deleteUserInfoByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_user_info ${value}]]>
+  	</delete>
+  	<delete id="deleteUserInfoByExample" parameterType="UserInfo" flushCache="true">
+    	<![CDATA[DELETE FROM t_user_info]]>
+    	<include refid="UserInfo_WHERE" />
+  	</delete>
+  	<delete id="deleteUserInfoByCondition" parameterType="cn.com.paladintyrion.client.search.UserInfoSearchBean" flushCache="true">
+    	<![CDATA[delete from t_user_info]]>
+    	<include refid="UserInfoSearchBean_WHERE" />
+  	</delete>
+  	<select id="getUserInfoByWhere" parameterType="java.lang.String" resultType="UserInfo" resultMap="t_user_infoMap">
+    	<![CDATA[SELECT * FROM t_user_info ${value}]]>
+  	</select>
+  	<select id="getUserInfoByExample" parameterType="UserInfo" resultType="UserInfo" resultMap="t_user_infoMap">  
+        <![CDATA[
+			SELECT * FROM t_user_info
+		]]>
+        <include refid="UserInfo_WHERE" />
+    </select>
+    <select id="getUserInfoByCondition" parameterType="cn.com.paladintyrion.client.search.UserInfoSearchBean" resultType="UserInfo" resultMap="t_user_infoMap">
+    	<![CDATA[SELECT * FROM t_user_info]]>
+    	<include refid="UserInfoSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getUserInfoListByWhere" parameterType="java.lang.String" resultType="UserInfo" resultMap="t_user_infoMap">
+    	<![CDATA[SELECT * FROM t_user_info ${sql}]]>
+  	</select>
+  	<select id="getUserInfoListByCondition" parameterType="cn.com.paladintyrion.client.search.UserInfoSearchBean" resultType="UserInfo" resultMap="t_user_infoMap">
+    	<![CDATA[SELECT * FROM t_user_info]]>
+    	<include refid="UserInfoSearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getUserInfoCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_user_info ${value}]]>
+  	</select>
+  	<select id="getUserInfoCountByExample" parameterType="UserInfo" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_user_info]]>
+    	<include refid="UserInfo_WHERE" />
+  	</select>
+  	<select id="getUserInfoCountByCondition" parameterType="cn.com.paladintyrion.client.search.UserInfoSearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_user_info]]>
+    	<include refid="UserInfoSearchBean_WHERE" />
+  	</select>
+  	<select id="getUserInfoColumnByWhere" parameterType="cn.com.paladintyrion.client.search.UserInfoSearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT $columnSql$ FROM t_user_info]]>
+    	<include refid="UserInfoSearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

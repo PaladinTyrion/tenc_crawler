@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.CollectPropertyDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="CollectProperty" id="t_collect_propertyMap">
+      	<result property="collectId" column="collect_id" />
+		<result property="propertyKey" column="property_key" />
+		<result property="propertyValue" column="property_value" />
+		<result property="site" column="site" />
+  	</resultMap>
+  	<sql id="CollectProperty_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyKey!=null">
+			 and property_key=#{propertyKey,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyValue!=null">
+			 and property_value=#{propertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectPropertySearchBean_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyKey!=null">
+			 and property_key=#{propertyKey,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyValue!=null">
+			 and property_value=#{propertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullPropertyValue!=null and isNotNullPropertyValue==true">
+			 and property_value is not null
+		</if>
+		<if test="isNotNullPropertyValue!=null and isNotNullPropertyValue==false">
+			 and property_value is null
+		</if>
+		<if test="inPropertyValue!=null">
+			 and property_value in
+			<foreach collection="list" index="index" item="inPropertyValue" open="(" separator="," close=")">
+				#{inPropertyValue}
+			</foreach>
+		</if>
+		<if test="notInPropertyValue!=null">
+			 and property_value not in
+			<foreach collection="list" index="index" item="notInPropertyValue" open="(" separator="," close=")">
+				#{notInPropertyValue}
+			</foreach>
+		</if>
+		<if test="noEqualsPropertyValue!=null">
+			 and property_value<![CDATA[<>]]>#{noEqualsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsPropertyValue!=null">
+			 and property_value=#{equalsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterPropertyValue!=null">
+			 and property_value<![CDATA[>]]>#{greaterPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsPropertyValue!=null">
+			 and property_value<![CDATA[>=]]>#{greaterEqualsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="lessPropertyValue!=null">
+			 and property_value<![CDATA[<]]>#{lessPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsPropertyValue!=null">
+			 and property_value<![CDATA[<=]]>#{lessEqualsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="likePropertyValue!=null">
+			 and property_value like "%"#{likePropertyValue,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikePropertyValue!=null">
+			 and property_value like "%"#{leftLikePropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikePropertyValue!=null">
+			 and property_value like #{rightLikePropertyValue,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectPropertyCondition_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyKey!=null">
+			 and property_key=#{propertyKey,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullPropertyValue!=null and isNotNullPropertyValue==true">
+			 and property_value is not null
+		</if>
+		<if test="isNotNullPropertyValue!=null and isNotNullPropertyValue==false">
+			 and property_value is null
+		</if>
+		<if test="inPropertyValue!=null">
+			 and property_value in
+			<foreach collection="list" index="index" item="inPropertyValue" open="(" separator="," close=")">
+				#{inPropertyValue}
+			</foreach>
+		</if>
+		<if test="notInPropertyValue!=null">
+			 and property_value not in
+			<foreach collection="list" index="index" item="notInPropertyValue" open="(" separator="," close=")">
+				#{notInPropertyValue}
+			</foreach>
+		</if>
+		<if test="noEqualsPropertyValue!=null">
+			 and property_value<![CDATA[<>]]>#{noEqualsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsPropertyValue!=null">
+			 and property_value=#{equalsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterPropertyValue!=null">
+			 and property_value<![CDATA[>]]>#{greaterPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsPropertyValue!=null">
+			 and property_value<![CDATA[>=]]>#{greaterEqualsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="lessPropertyValue!=null">
+			 and property_value<![CDATA[<]]>#{lessPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsPropertyValue!=null">
+			 and property_value<![CDATA[<=]]>#{lessEqualsPropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="likePropertyValue!=null">
+			 and property_value like "%"#{likePropertyValue,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikePropertyValue!=null">
+			 and property_value like "%"#{leftLikePropertyValue,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikePropertyValue!=null">
+			 and property_value like #{rightLikePropertyValue,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+	</where>
+  </sql>
+  <sql id="CollectProperty_UPDATE">
+	<set>
+		<if test="collectId!=null">
+			collect_id=#{collectId,jdbcType=VARCHAR},
+		</if>
+		<if test="propertyKey!=null">
+			property_key=#{propertyKey,jdbcType=VARCHAR},
+		</if>
+		<if test="propertyValue!=null">
+			property_value=#{propertyValue,jdbcType=VARCHAR},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertCollectProperty" parameterType="CollectProperty" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_collect_property (collect_id,property_key,property_value,site) VALUES (#{collectId},#{propertyKey},#{propertyValue},#{site})
+		]]>
+    </insert>
+    <update id="update_CollectProperty" parameterType="CollectProperty" flushCache="true">
+    	<![CDATA[UPDATE t_collect_property SET collect_id=#{collectId,jdbcType=VARCHAR},,property_key=#{propertyKey,jdbcType=VARCHAR},,property_value=#{propertyValue,jdbcType=VARCHAR},,site=#{site,jdbcType=NUMERIC}, WHERE collect_id=#{collectId,jdbcType=VARCHAR} AND property_key=#{propertyKey,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+    <update id="updateCollectPropertyByExample" parameterType="CollectProperty" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_collect_property
+    	]]>
+    	<include refid="CollectProperty_UPDATE" />
+    	<![CDATA[WHERE collect_id=#{collectId,jdbcType=VARCHAR} AND property_key=#{propertyKey,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC}]]>
+  	</update>
+  	<update id="updateCollectPropertyByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_collect_property ${value}
+    	]]>
+  	</update>
+  	<update id="updateCollectPropertyByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPropertySearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_collect_property]]>
+    	<include refid="CollectProperty_UPDATE" />
+    	<include refid="CollectPropertyCondition_WHERE" />
+  	</update>
+  	<delete id="deleteCollectPropertyByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_collect_property ${value}]]>
+  	</delete>
+  	<delete id="deleteCollectPropertyByExample" parameterType="CollectProperty" flushCache="true">
+    	<![CDATA[DELETE FROM t_collect_property]]>
+    	<include refid="CollectProperty_WHERE" />
+  	</delete>
+  	<delete id="deleteCollectPropertyByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPropertySearchBean" flushCache="true">
+    	<![CDATA[delete from t_collect_property]]>
+    	<include refid="CollectPropertySearchBean_WHERE" />
+  	</delete>
+  	<select id="getCollectPropertyByWhere" parameterType="java.lang.String" resultType="CollectProperty" resultMap="t_collect_propertyMap">
+    	<![CDATA[SELECT * FROM t_collect_property ${value}]]>
+  	</select>
+  	<select id="getCollectPropertyByExample" parameterType="CollectProperty" resultType="CollectProperty" resultMap="t_collect_propertyMap">  
+        <![CDATA[
+			SELECT * FROM t_collect_property
+		]]>
+        <include refid="CollectProperty_WHERE" />
+    </select>
+    <select id="getCollectPropertyByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPropertySearchBean" resultType="CollectProperty" resultMap="t_collect_propertyMap">
+    	<![CDATA[SELECT * FROM t_collect_property]]>
+    	<include refid="CollectPropertySearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCollectPropertyListByWhere" parameterType="java.lang.String" resultType="CollectProperty" resultMap="t_collect_propertyMap">
+    	<![CDATA[SELECT * FROM t_collect_property ${sql}]]>
+  	</select>
+  	<select id="getCollectPropertyListByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPropertySearchBean" resultType="CollectProperty" resultMap="t_collect_propertyMap">
+    	<![CDATA[SELECT * FROM t_collect_property]]>
+    	<include refid="CollectPropertySearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getCollectPropertyCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_property ${value}]]>
+  	</select>
+  	<select id="getCollectPropertyCountByExample" parameterType="CollectProperty" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_property]]>
+    	<include refid="CollectProperty_WHERE" />
+  	</select>
+  	<select id="getCollectPropertyCountByCondition" parameterType="cn.com.paladintyrion.client.search.CollectPropertySearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_collect_property]]>
+    	<include refid="CollectPropertySearchBean_WHERE" />
+  	</select>
+  	<select id="getCollectPropertyColumnByWhere" parameterType="cn.com.paladintyrion.client.search.CollectPropertySearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT $columnSql$ FROM t_collect_property]]>
+    	<include refid="CollectPropertySearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

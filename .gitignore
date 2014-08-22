@@ -1,0 +1,8 @@
+#maven target
+target/
+
+#log
+log/
+
+#ignore lib
+#lib/

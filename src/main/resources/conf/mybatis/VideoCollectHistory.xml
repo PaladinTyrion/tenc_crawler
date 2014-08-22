@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.paladintyrion.client.dao.VideoCollectHistoryDao">
+	<cache type="org.mybatis.caches.oscache.OSCache"/>
+	<resultMap type="VideoCollectHistory" id="t_video_collect_historyMap">
+      	<result property="collectId" column="collect_id" />
+		<result property="collectName" column="collect_name" />
+		<result property="partCount" column="part_count" />
+		<result property="director" column="director" />
+		<result property="collectDesc" column="collect_desc" />
+		<result property="collectCategory" column="collect_category" />
+		<result property="collectTag" column="collect_tag" />
+		<result property="actor" column="actor" />
+		<result property="playCount" column="play_count" />
+		<result property="score" column="score" />
+		<result property="year" column="year" />
+		<result property="site" column="site" />
+		<result property="createTime" column="create_time" />
+		<result property="remark" column="remark" />
+  	</resultMap>
+  	<sql id="VideoCollectHistory_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="collectName!=null">
+			 and collect_name=#{collectName,jdbcType=VARCHAR}
+		</if>
+		<if test="partCount!=null">
+			 and part_count=#{partCount,jdbcType=NUMERIC}
+		</if>
+		<if test="director!=null">
+			 and director=#{director,jdbcType=VARCHAR}
+		</if>
+		<if test="collectDesc!=null">
+			 and collect_desc=#{collectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="collectCategory!=null">
+			 and collect_category=#{collectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="collectTag!=null">
+			 and collect_tag=#{collectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="actor!=null">
+			 and actor=#{actor,jdbcType=VARCHAR}
+		</if>
+		<if test="playCount!=null">
+			 and play_count=#{playCount,jdbcType=NUMERIC}
+		</if>
+		<if test="score!=null">
+			 and score=#{score,jdbcType=NUMERIC}
+		</if>
+		<if test="year!=null">
+			 and year=#{year,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+		<if test="remark!=null">
+			 and remark=#{remark,jdbcType=VARCHAR}
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoCollectHistorySearchBean_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="collectName!=null">
+			 and collect_name=#{collectName,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==true">
+			 and collect_name is not null
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==false">
+			 and collect_name is null
+		</if>
+		<if test="inCollectName!=null">
+			 and collect_name in
+			<foreach collection="list" index="index" item="inCollectName" open="(" separator="," close=")">
+				#{inCollectName}
+			</foreach>
+		</if>
+		<if test="notInCollectName!=null">
+			 and collect_name not in
+			<foreach collection="list" index="index" item="notInCollectName" open="(" separator="," close=")">
+				#{notInCollectName}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectName!=null">
+			 and collect_name<![CDATA[<>]]>#{noEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectName!=null">
+			 and collect_name=#{equalsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectName!=null">
+			 and collect_name<![CDATA[>]]>#{greaterCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectName!=null">
+			 and collect_name<![CDATA[>=]]>#{greaterEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectName!=null">
+			 and collect_name<![CDATA[<]]>#{lessCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectName!=null">
+			 and collect_name<![CDATA[<=]]>#{lessEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectName!=null">
+			 and collect_name like "%"#{likeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectName!=null">
+			 and collect_name like "%"#{leftLikeCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectName!=null">
+			 and collect_name like #{rightLikeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="partCount!=null">
+			 and part_count=#{partCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullPartCount!=null and isNotNullPartCount==true">
+			 and part_count is not null
+		</if>
+		<if test="isNotNullPartCount!=null and isNotNullPartCount==false">
+			 and part_count is null
+		</if>
+		<if test="inPartCount!=null">
+			 and part_count in
+			<foreach collection="list" index="index" item="inPartCount" open="(" separator="," close=")">
+				#{inPartCount}
+			</foreach>
+		</if>
+		<if test="notInPartCount!=null">
+			 and part_count not in
+			<foreach collection="list" index="index" item="notInPartCount" open="(" separator="," close=")">
+				#{notInPartCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPartCount!=null">
+			 and part_count<![CDATA[<>]]>#{noEqualsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPartCount!=null">
+			 and part_count=#{equalsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPartCount!=null">
+			 and part_count<![CDATA[>]]>#{greaterPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPartCount!=null">
+			 and part_count<![CDATA[>=]]>#{greaterEqualsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPartCount!=null">
+			 and part_count<![CDATA[<]]>#{lessPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPartCount!=null">
+			 and part_count<![CDATA[<=]]>#{lessEqualsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="director!=null">
+			 and director=#{director,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullDirector!=null and isNotNullDirector==true">
+			 and director is not null
+		</if>
+		<if test="isNotNullDirector!=null and isNotNullDirector==false">
+			 and director is null
+		</if>
+		<if test="inDirector!=null">
+			 and director in
+			<foreach collection="list" index="index" item="inDirector" open="(" separator="," close=")">
+				#{inDirector}
+			</foreach>
+		</if>
+		<if test="notInDirector!=null">
+			 and director not in
+			<foreach collection="list" index="index" item="notInDirector" open="(" separator="," close=")">
+				#{notInDirector}
+			</foreach>
+		</if>
+		<if test="noEqualsDirector!=null">
+			 and director<![CDATA[<>]]>#{noEqualsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsDirector!=null">
+			 and director=#{equalsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterDirector!=null">
+			 and director<![CDATA[>]]>#{greaterDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsDirector!=null">
+			 and director<![CDATA[>=]]>#{greaterEqualsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="lessDirector!=null">
+			 and director<![CDATA[<]]>#{lessDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsDirector!=null">
+			 and director<![CDATA[<=]]>#{lessEqualsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="likeDirector!=null">
+			 and director like "%"#{likeDirector,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeDirector!=null">
+			 and director like "%"#{leftLikeDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeDirector!=null">
+			 and director like #{rightLikeDirector,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="collectDesc!=null">
+			 and collect_desc=#{collectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectDesc!=null and isNotNullCollectDesc==true">
+			 and collect_desc is not null
+		</if>
+		<if test="isNotNullCollectDesc!=null and isNotNullCollectDesc==false">
+			 and collect_desc is null
+		</if>
+		<if test="inCollectDesc!=null">
+			 and collect_desc in
+			<foreach collection="list" index="index" item="inCollectDesc" open="(" separator="," close=")">
+				#{inCollectDesc}
+			</foreach>
+		</if>
+		<if test="notInCollectDesc!=null">
+			 and collect_desc not in
+			<foreach collection="list" index="index" item="notInCollectDesc" open="(" separator="," close=")">
+				#{notInCollectDesc}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectDesc!=null">
+			 and collect_desc<![CDATA[<>]]>#{noEqualsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectDesc!=null">
+			 and collect_desc=#{equalsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectDesc!=null">
+			 and collect_desc<![CDATA[>]]>#{greaterCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectDesc!=null">
+			 and collect_desc<![CDATA[>=]]>#{greaterEqualsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectDesc!=null">
+			 and collect_desc<![CDATA[<]]>#{lessCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectDesc!=null">
+			 and collect_desc<![CDATA[<=]]>#{lessEqualsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectDesc!=null">
+			 and collect_desc like "%"#{likeCollectDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectDesc!=null">
+			 and collect_desc like "%"#{leftLikeCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectDesc!=null">
+			 and collect_desc like #{rightLikeCollectDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="collectCategory!=null">
+			 and collect_category=#{collectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectCategory!=null and isNotNullCollectCategory==true">
+			 and collect_category is not null
+		</if>
+		<if test="isNotNullCollectCategory!=null and isNotNullCollectCategory==false">
+			 and collect_category is null
+		</if>
+		<if test="inCollectCategory!=null">
+			 and collect_category in
+			<foreach collection="list" index="index" item="inCollectCategory" open="(" separator="," close=")">
+				#{inCollectCategory}
+			</foreach>
+		</if>
+		<if test="notInCollectCategory!=null">
+			 and collect_category not in
+			<foreach collection="list" index="index" item="notInCollectCategory" open="(" separator="," close=")">
+				#{notInCollectCategory}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectCategory!=null">
+			 and collect_category<![CDATA[<>]]>#{noEqualsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectCategory!=null">
+			 and collect_category=#{equalsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectCategory!=null">
+			 and collect_category<![CDATA[>]]>#{greaterCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectCategory!=null">
+			 and collect_category<![CDATA[>=]]>#{greaterEqualsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectCategory!=null">
+			 and collect_category<![CDATA[<]]>#{lessCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectCategory!=null">
+			 and collect_category<![CDATA[<=]]>#{lessEqualsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectCategory!=null">
+			 and collect_category like "%"#{likeCollectCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectCategory!=null">
+			 and collect_category like "%"#{leftLikeCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectCategory!=null">
+			 and collect_category like #{rightLikeCollectCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="collectTag!=null">
+			 and collect_tag=#{collectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectTag!=null and isNotNullCollectTag==true">
+			 and collect_tag is not null
+		</if>
+		<if test="isNotNullCollectTag!=null and isNotNullCollectTag==false">
+			 and collect_tag is null
+		</if>
+		<if test="inCollectTag!=null">
+			 and collect_tag in
+			<foreach collection="list" index="index" item="inCollectTag" open="(" separator="," close=")">
+				#{inCollectTag}
+			</foreach>
+		</if>
+		<if test="notInCollectTag!=null">
+			 and collect_tag not in
+			<foreach collection="list" index="index" item="notInCollectTag" open="(" separator="," close=")">
+				#{notInCollectTag}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectTag!=null">
+			 and collect_tag<![CDATA[<>]]>#{noEqualsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectTag!=null">
+			 and collect_tag=#{equalsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectTag!=null">
+			 and collect_tag<![CDATA[>]]>#{greaterCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectTag!=null">
+			 and collect_tag<![CDATA[>=]]>#{greaterEqualsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectTag!=null">
+			 and collect_tag<![CDATA[<]]>#{lessCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectTag!=null">
+			 and collect_tag<![CDATA[<=]]>#{lessEqualsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectTag!=null">
+			 and collect_tag like "%"#{likeCollectTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectTag!=null">
+			 and collect_tag like "%"#{leftLikeCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectTag!=null">
+			 and collect_tag like #{rightLikeCollectTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="actor!=null">
+			 and actor=#{actor,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==true">
+			 and actor is not null
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==false">
+			 and actor is null
+		</if>
+		<if test="inActor!=null">
+			 and actor in
+			<foreach collection="list" index="index" item="inActor" open="(" separator="," close=")">
+				#{inActor}
+			</foreach>
+		</if>
+		<if test="notInActor!=null">
+			 and actor not in
+			<foreach collection="list" index="index" item="notInActor" open="(" separator="," close=")">
+				#{notInActor}
+			</foreach>
+		</if>
+		<if test="noEqualsActor!=null">
+			 and actor<![CDATA[<>]]>#{noEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsActor!=null">
+			 and actor=#{equalsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterActor!=null">
+			 and actor<![CDATA[>]]>#{greaterActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsActor!=null">
+			 and actor<![CDATA[>=]]>#{greaterEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessActor!=null">
+			 and actor<![CDATA[<]]>#{lessActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsActor!=null">
+			 and actor<![CDATA[<=]]>#{lessEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="likeActor!=null">
+			 and actor like "%"#{likeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeActor!=null">
+			 and actor like "%"#{leftLikeActor,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeActor!=null">
+			 and actor like #{rightLikeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="playCount!=null">
+			 and play_count=#{playCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==true">
+			 and play_count is not null
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==false">
+			 and play_count is null
+		</if>
+		<if test="inPlayCount!=null">
+			 and play_count in
+			<foreach collection="list" index="index" item="inPlayCount" open="(" separator="," close=")">
+				#{inPlayCount}
+			</foreach>
+		</if>
+		<if test="notInPlayCount!=null">
+			 and play_count not in
+			<foreach collection="list" index="index" item="notInPlayCount" open="(" separator="," close=")">
+				#{notInPlayCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPlayCount!=null">
+			 and play_count<![CDATA[<>]]>#{noEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPlayCount!=null">
+			 and play_count=#{equalsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPlayCount!=null">
+			 and play_count<![CDATA[>]]>#{greaterPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPlayCount!=null">
+			 and play_count<![CDATA[>=]]>#{greaterEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPlayCount!=null">
+			 and play_count<![CDATA[<]]>#{lessPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPlayCount!=null">
+			 and play_count<![CDATA[<=]]>#{lessEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="score!=null">
+			 and score=#{score,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullScore!=null and isNotNullScore==true">
+			 and score is not null
+		</if>
+		<if test="isNotNullScore!=null and isNotNullScore==false">
+			 and score is null
+		</if>
+		<if test="inScore!=null">
+			 and score in
+			<foreach collection="list" index="index" item="inScore" open="(" separator="," close=")">
+				#{inScore}
+			</foreach>
+		</if>
+		<if test="notInScore!=null">
+			 and score not in
+			<foreach collection="list" index="index" item="notInScore" open="(" separator="," close=")">
+				#{notInScore}
+			</foreach>
+		</if>
+		<if test="noEqualsScore!=null">
+			 and score<![CDATA[<>]]>#{noEqualsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsScore!=null">
+			 and score=#{equalsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterScore!=null">
+			 and score<![CDATA[>]]>#{greaterScore,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsScore!=null">
+			 and score<![CDATA[>=]]>#{greaterEqualsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="lessScore!=null">
+			 and score<![CDATA[<]]>#{lessScore,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsScore!=null">
+			 and score<![CDATA[<=]]>#{lessEqualsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="year!=null">
+			 and year=#{year,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullYear!=null and isNotNullYear==true">
+			 and year is not null
+		</if>
+		<if test="isNotNullYear!=null and isNotNullYear==false">
+			 and year is null
+		</if>
+		<if test="inYear!=null">
+			 and year in
+			<foreach collection="list" index="index" item="inYear" open="(" separator="," close=")">
+				#{inYear}
+			</foreach>
+		</if>
+		<if test="notInYear!=null">
+			 and year not in
+			<foreach collection="list" index="index" item="notInYear" open="(" separator="," close=")">
+				#{notInYear}
+			</foreach>
+		</if>
+		<if test="noEqualsYear!=null">
+			 and year<![CDATA[<>]]>#{noEqualsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsYear!=null">
+			 and year=#{equalsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterYear!=null">
+			 and year<![CDATA[>]]>#{greaterYear,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsYear!=null">
+			 and year<![CDATA[>=]]>#{greaterEqualsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="lessYear!=null">
+			 and year<![CDATA[<]]>#{lessYear,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsYear!=null">
+			 and year<![CDATA[<=]]>#{lessEqualsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+		<if test="remark!=null">
+			 and remark=#{remark,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullRemark!=null and isNotNullRemark==true">
+			 and remark is not null
+		</if>
+		<if test="isNotNullRemark!=null and isNotNullRemark==false">
+			 and remark is null
+		</if>
+		<if test="inRemark!=null">
+			 and remark in
+			<foreach collection="list" index="index" item="inRemark" open="(" separator="," close=")">
+				#{inRemark}
+			</foreach>
+		</if>
+		<if test="notInRemark!=null">
+			 and remark not in
+			<foreach collection="list" index="index" item="notInRemark" open="(" separator="," close=")">
+				#{notInRemark}
+			</foreach>
+		</if>
+		<if test="noEqualsRemark!=null">
+			 and remark<![CDATA[<>]]>#{noEqualsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsRemark!=null">
+			 and remark=#{equalsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterRemark!=null">
+			 and remark<![CDATA[>]]>#{greaterRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsRemark!=null">
+			 and remark<![CDATA[>=]]>#{greaterEqualsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="lessRemark!=null">
+			 and remark<![CDATA[<]]>#{lessRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsRemark!=null">
+			 and remark<![CDATA[<=]]>#{lessEqualsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="likeRemark!=null">
+			 and remark like "%"#{likeRemark,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeRemark!=null">
+			 and remark like "%"#{leftLikeRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeRemark!=null">
+			 and remark like #{rightLikeRemark,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoCollectHistoryCondition_WHERE">
+	<where>
+		<if test="collectId!=null">
+			 and collect_id=#{collectId,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==true">
+			 and collect_name is not null
+		</if>
+		<if test="isNotNullCollectName!=null and isNotNullCollectName==false">
+			 and collect_name is null
+		</if>
+		<if test="inCollectName!=null">
+			 and collect_name in
+			<foreach collection="list" index="index" item="inCollectName" open="(" separator="," close=")">
+				#{inCollectName}
+			</foreach>
+		</if>
+		<if test="notInCollectName!=null">
+			 and collect_name not in
+			<foreach collection="list" index="index" item="notInCollectName" open="(" separator="," close=")">
+				#{notInCollectName}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectName!=null">
+			 and collect_name<![CDATA[<>]]>#{noEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectName!=null">
+			 and collect_name=#{equalsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectName!=null">
+			 and collect_name<![CDATA[>]]>#{greaterCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectName!=null">
+			 and collect_name<![CDATA[>=]]>#{greaterEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectName!=null">
+			 and collect_name<![CDATA[<]]>#{lessCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectName!=null">
+			 and collect_name<![CDATA[<=]]>#{lessEqualsCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectName!=null">
+			 and collect_name like "%"#{likeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectName!=null">
+			 and collect_name like "%"#{leftLikeCollectName,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectName!=null">
+			 and collect_name like #{rightLikeCollectName,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullPartCount!=null and isNotNullPartCount==true">
+			 and part_count is not null
+		</if>
+		<if test="isNotNullPartCount!=null and isNotNullPartCount==false">
+			 and part_count is null
+		</if>
+		<if test="inPartCount!=null">
+			 and part_count in
+			<foreach collection="list" index="index" item="inPartCount" open="(" separator="," close=")">
+				#{inPartCount}
+			</foreach>
+		</if>
+		<if test="notInPartCount!=null">
+			 and part_count not in
+			<foreach collection="list" index="index" item="notInPartCount" open="(" separator="," close=")">
+				#{notInPartCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPartCount!=null">
+			 and part_count<![CDATA[<>]]>#{noEqualsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPartCount!=null">
+			 and part_count=#{equalsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPartCount!=null">
+			 and part_count<![CDATA[>]]>#{greaterPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPartCount!=null">
+			 and part_count<![CDATA[>=]]>#{greaterEqualsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPartCount!=null">
+			 and part_count<![CDATA[<]]>#{lessPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPartCount!=null">
+			 and part_count<![CDATA[<=]]>#{lessEqualsPartCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullDirector!=null and isNotNullDirector==true">
+			 and director is not null
+		</if>
+		<if test="isNotNullDirector!=null and isNotNullDirector==false">
+			 and director is null
+		</if>
+		<if test="inDirector!=null">
+			 and director in
+			<foreach collection="list" index="index" item="inDirector" open="(" separator="," close=")">
+				#{inDirector}
+			</foreach>
+		</if>
+		<if test="notInDirector!=null">
+			 and director not in
+			<foreach collection="list" index="index" item="notInDirector" open="(" separator="," close=")">
+				#{notInDirector}
+			</foreach>
+		</if>
+		<if test="noEqualsDirector!=null">
+			 and director<![CDATA[<>]]>#{noEqualsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsDirector!=null">
+			 and director=#{equalsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterDirector!=null">
+			 and director<![CDATA[>]]>#{greaterDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsDirector!=null">
+			 and director<![CDATA[>=]]>#{greaterEqualsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="lessDirector!=null">
+			 and director<![CDATA[<]]>#{lessDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsDirector!=null">
+			 and director<![CDATA[<=]]>#{lessEqualsDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="likeDirector!=null">
+			 and director like "%"#{likeDirector,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeDirector!=null">
+			 and director like "%"#{leftLikeDirector,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeDirector!=null">
+			 and director like #{rightLikeDirector,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCollectDesc!=null and isNotNullCollectDesc==true">
+			 and collect_desc is not null
+		</if>
+		<if test="isNotNullCollectDesc!=null and isNotNullCollectDesc==false">
+			 and collect_desc is null
+		</if>
+		<if test="inCollectDesc!=null">
+			 and collect_desc in
+			<foreach collection="list" index="index" item="inCollectDesc" open="(" separator="," close=")">
+				#{inCollectDesc}
+			</foreach>
+		</if>
+		<if test="notInCollectDesc!=null">
+			 and collect_desc not in
+			<foreach collection="list" index="index" item="notInCollectDesc" open="(" separator="," close=")">
+				#{notInCollectDesc}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectDesc!=null">
+			 and collect_desc<![CDATA[<>]]>#{noEqualsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectDesc!=null">
+			 and collect_desc=#{equalsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectDesc!=null">
+			 and collect_desc<![CDATA[>]]>#{greaterCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectDesc!=null">
+			 and collect_desc<![CDATA[>=]]>#{greaterEqualsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectDesc!=null">
+			 and collect_desc<![CDATA[<]]>#{lessCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectDesc!=null">
+			 and collect_desc<![CDATA[<=]]>#{lessEqualsCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectDesc!=null">
+			 and collect_desc like "%"#{likeCollectDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectDesc!=null">
+			 and collect_desc like "%"#{leftLikeCollectDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectDesc!=null">
+			 and collect_desc like #{rightLikeCollectDesc,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCollectCategory!=null and isNotNullCollectCategory==true">
+			 and collect_category is not null
+		</if>
+		<if test="isNotNullCollectCategory!=null and isNotNullCollectCategory==false">
+			 and collect_category is null
+		</if>
+		<if test="inCollectCategory!=null">
+			 and collect_category in
+			<foreach collection="list" index="index" item="inCollectCategory" open="(" separator="," close=")">
+				#{inCollectCategory}
+			</foreach>
+		</if>
+		<if test="notInCollectCategory!=null">
+			 and collect_category not in
+			<foreach collection="list" index="index" item="notInCollectCategory" open="(" separator="," close=")">
+				#{notInCollectCategory}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectCategory!=null">
+			 and collect_category<![CDATA[<>]]>#{noEqualsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectCategory!=null">
+			 and collect_category=#{equalsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectCategory!=null">
+			 and collect_category<![CDATA[>]]>#{greaterCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectCategory!=null">
+			 and collect_category<![CDATA[>=]]>#{greaterEqualsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectCategory!=null">
+			 and collect_category<![CDATA[<]]>#{lessCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectCategory!=null">
+			 and collect_category<![CDATA[<=]]>#{lessEqualsCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectCategory!=null">
+			 and collect_category like "%"#{likeCollectCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectCategory!=null">
+			 and collect_category like "%"#{leftLikeCollectCategory,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectCategory!=null">
+			 and collect_category like #{rightLikeCollectCategory,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullCollectTag!=null and isNotNullCollectTag==true">
+			 and collect_tag is not null
+		</if>
+		<if test="isNotNullCollectTag!=null and isNotNullCollectTag==false">
+			 and collect_tag is null
+		</if>
+		<if test="inCollectTag!=null">
+			 and collect_tag in
+			<foreach collection="list" index="index" item="inCollectTag" open="(" separator="," close=")">
+				#{inCollectTag}
+			</foreach>
+		</if>
+		<if test="notInCollectTag!=null">
+			 and collect_tag not in
+			<foreach collection="list" index="index" item="notInCollectTag" open="(" separator="," close=")">
+				#{notInCollectTag}
+			</foreach>
+		</if>
+		<if test="noEqualsCollectTag!=null">
+			 and collect_tag<![CDATA[<>]]>#{noEqualsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsCollectTag!=null">
+			 and collect_tag=#{equalsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterCollectTag!=null">
+			 and collect_tag<![CDATA[>]]>#{greaterCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsCollectTag!=null">
+			 and collect_tag<![CDATA[>=]]>#{greaterEqualsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessCollectTag!=null">
+			 and collect_tag<![CDATA[<]]>#{lessCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsCollectTag!=null">
+			 and collect_tag<![CDATA[<=]]>#{lessEqualsCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="likeCollectTag!=null">
+			 and collect_tag like "%"#{likeCollectTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeCollectTag!=null">
+			 and collect_tag like "%"#{leftLikeCollectTag,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeCollectTag!=null">
+			 and collect_tag like #{rightLikeCollectTag,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==true">
+			 and actor is not null
+		</if>
+		<if test="isNotNullActor!=null and isNotNullActor==false">
+			 and actor is null
+		</if>
+		<if test="inActor!=null">
+			 and actor in
+			<foreach collection="list" index="index" item="inActor" open="(" separator="," close=")">
+				#{inActor}
+			</foreach>
+		</if>
+		<if test="notInActor!=null">
+			 and actor not in
+			<foreach collection="list" index="index" item="notInActor" open="(" separator="," close=")">
+				#{notInActor}
+			</foreach>
+		</if>
+		<if test="noEqualsActor!=null">
+			 and actor<![CDATA[<>]]>#{noEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsActor!=null">
+			 and actor=#{equalsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterActor!=null">
+			 and actor<![CDATA[>]]>#{greaterActor,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsActor!=null">
+			 and actor<![CDATA[>=]]>#{greaterEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessActor!=null">
+			 and actor<![CDATA[<]]>#{lessActor,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsActor!=null">
+			 and actor<![CDATA[<=]]>#{lessEqualsActor,jdbcType=VARCHAR}
+		</if>
+		<if test="likeActor!=null">
+			 and actor like "%"#{likeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeActor!=null">
+			 and actor like "%"#{leftLikeActor,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeActor!=null">
+			 and actor like #{rightLikeActor,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==true">
+			 and play_count is not null
+		</if>
+		<if test="isNotNullPlayCount!=null and isNotNullPlayCount==false">
+			 and play_count is null
+		</if>
+		<if test="inPlayCount!=null">
+			 and play_count in
+			<foreach collection="list" index="index" item="inPlayCount" open="(" separator="," close=")">
+				#{inPlayCount}
+			</foreach>
+		</if>
+		<if test="notInPlayCount!=null">
+			 and play_count not in
+			<foreach collection="list" index="index" item="notInPlayCount" open="(" separator="," close=")">
+				#{notInPlayCount}
+			</foreach>
+		</if>
+		<if test="noEqualsPlayCount!=null">
+			 and play_count<![CDATA[<>]]>#{noEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsPlayCount!=null">
+			 and play_count=#{equalsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterPlayCount!=null">
+			 and play_count<![CDATA[>]]>#{greaterPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsPlayCount!=null">
+			 and play_count<![CDATA[>=]]>#{greaterEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessPlayCount!=null">
+			 and play_count<![CDATA[<]]>#{lessPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsPlayCount!=null">
+			 and play_count<![CDATA[<=]]>#{lessEqualsPlayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullScore!=null and isNotNullScore==true">
+			 and score is not null
+		</if>
+		<if test="isNotNullScore!=null and isNotNullScore==false">
+			 and score is null
+		</if>
+		<if test="inScore!=null">
+			 and score in
+			<foreach collection="list" index="index" item="inScore" open="(" separator="," close=")">
+				#{inScore}
+			</foreach>
+		</if>
+		<if test="notInScore!=null">
+			 and score not in
+			<foreach collection="list" index="index" item="notInScore" open="(" separator="," close=")">
+				#{notInScore}
+			</foreach>
+		</if>
+		<if test="noEqualsScore!=null">
+			 and score<![CDATA[<>]]>#{noEqualsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsScore!=null">
+			 and score=#{equalsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterScore!=null">
+			 and score<![CDATA[>]]>#{greaterScore,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsScore!=null">
+			 and score<![CDATA[>=]]>#{greaterEqualsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="lessScore!=null">
+			 and score<![CDATA[<]]>#{lessScore,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsScore!=null">
+			 and score<![CDATA[<=]]>#{lessEqualsScore,jdbcType=NUMERIC}
+		</if>
+		<if test="isNotNullYear!=null and isNotNullYear==true">
+			 and year is not null
+		</if>
+		<if test="isNotNullYear!=null and isNotNullYear==false">
+			 and year is null
+		</if>
+		<if test="inYear!=null">
+			 and year in
+			<foreach collection="list" index="index" item="inYear" open="(" separator="," close=")">
+				#{inYear}
+			</foreach>
+		</if>
+		<if test="notInYear!=null">
+			 and year not in
+			<foreach collection="list" index="index" item="notInYear" open="(" separator="," close=")">
+				#{notInYear}
+			</foreach>
+		</if>
+		<if test="noEqualsYear!=null">
+			 and year<![CDATA[<>]]>#{noEqualsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="equalsYear!=null">
+			 and year=#{equalsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterYear!=null">
+			 and year<![CDATA[>]]>#{greaterYear,jdbcType=NUMERIC}
+		</if>
+		<if test="greaterEqualsYear!=null">
+			 and year<![CDATA[>=]]>#{greaterEqualsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="lessYear!=null">
+			 and year<![CDATA[<]]>#{lessYear,jdbcType=NUMERIC}
+		</if>
+		<if test="lessEqualsYear!=null">
+			 and year<![CDATA[<=]]>#{lessEqualsYear,jdbcType=NUMERIC}
+		</if>
+		<if test="site!=null">
+			 and site=#{site,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime!=null">
+			 and create_time=#{createTime,jdbcType=VARCHAR}
+		</if>
+		<if test="isNotNullRemark!=null and isNotNullRemark==true">
+			 and remark is not null
+		</if>
+		<if test="isNotNullRemark!=null and isNotNullRemark==false">
+			 and remark is null
+		</if>
+		<if test="inRemark!=null">
+			 and remark in
+			<foreach collection="list" index="index" item="inRemark" open="(" separator="," close=")">
+				#{inRemark}
+			</foreach>
+		</if>
+		<if test="notInRemark!=null">
+			 and remark not in
+			<foreach collection="list" index="index" item="notInRemark" open="(" separator="," close=")">
+				#{notInRemark}
+			</foreach>
+		</if>
+		<if test="noEqualsRemark!=null">
+			 and remark<![CDATA[<>]]>#{noEqualsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="equalsRemark!=null">
+			 and remark=#{equalsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterRemark!=null">
+			 and remark<![CDATA[>]]>#{greaterRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="greaterEqualsRemark!=null">
+			 and remark<![CDATA[>=]]>#{greaterEqualsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="lessRemark!=null">
+			 and remark<![CDATA[<]]>#{lessRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="lessEqualsRemark!=null">
+			 and remark<![CDATA[<=]]>#{lessEqualsRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="likeRemark!=null">
+			 and remark like "%"#{likeRemark,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="leftLikeRemark!=null">
+			 and remark like "%"#{leftLikeRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="rightLikeRemark!=null">
+			 and remark like #{rightLikeRemark,jdbcType=VARCHAR}"%"
+		</if>
+	</where>
+  </sql>
+  <sql id="VideoCollectHistory_UPDATE">
+	<set>
+		<if test="collectId!=null">
+			collect_id=#{collectId,jdbcType=VARCHAR},
+		</if>
+		<if test="collectName!=null">
+			collect_name=#{collectName,jdbcType=VARCHAR},
+		</if>
+		<if test="partCount!=null">
+			part_count=#{partCount,jdbcType=NUMERIC},
+		</if>
+		<if test="director!=null">
+			director=#{director,jdbcType=VARCHAR},
+		</if>
+		<if test="collectDesc!=null">
+			collect_desc=#{collectDesc,jdbcType=VARCHAR},
+		</if>
+		<if test="collectCategory!=null">
+			collect_category=#{collectCategory,jdbcType=VARCHAR},
+		</if>
+		<if test="collectTag!=null">
+			collect_tag=#{collectTag,jdbcType=VARCHAR},
+		</if>
+		<if test="actor!=null">
+			actor=#{actor,jdbcType=VARCHAR},
+		</if>
+		<if test="playCount!=null">
+			play_count=#{playCount,jdbcType=NUMERIC},
+		</if>
+		<if test="score!=null">
+			score=#{score,jdbcType=NUMERIC},
+		</if>
+		<if test="year!=null">
+			year=#{year,jdbcType=NUMERIC},
+		</if>
+		<if test="site!=null">
+			site=#{site,jdbcType=NUMERIC},
+		</if>
+		<if test="createTime!=null">
+			create_time=#{createTime,jdbcType=VARCHAR},
+		</if>
+		<if test="remark!=null">
+			remark=#{remark,jdbcType=VARCHAR},
+		</if>
+	</set>
+  </sql>
+    <insert id="insertVideoCollectHistory" parameterType="VideoCollectHistory" flushCache="true">
+    	<![CDATA[
+			INSERT INTO t_video_collect_history (collect_id,collect_name,part_count,director,collect_desc,collect_category,collect_tag,actor,play_count,score,year,site,create_time,remark) VALUES (#{collectId},#{collectName},#{partCount},#{director},#{collectDesc},#{collectCategory},#{collectTag},#{actor},#{playCount},#{score},#{year},#{site},#{createTime},#{remark})
+		]]>
+    </insert>
+    <update id="update_VideoCollectHistory" parameterType="VideoCollectHistory" flushCache="true">
+    	<![CDATA[UPDATE t_video_collect_history SET collect_id=#{collectId,jdbcType=VARCHAR},,collect_name=#{collectName,jdbcType=VARCHAR},,part_count=#{partCount,jdbcType=NUMERIC},,director=#{director,jdbcType=VARCHAR},,collect_desc=#{collectDesc,jdbcType=VARCHAR},,collect_category=#{collectCategory,jdbcType=VARCHAR},,collect_tag=#{collectTag,jdbcType=VARCHAR},,actor=#{actor,jdbcType=VARCHAR},,play_count=#{playCount,jdbcType=NUMERIC},,score=#{score,jdbcType=NUMERIC},,year=#{year,jdbcType=NUMERIC},,site=#{site,jdbcType=NUMERIC},,create_time=#{createTime,jdbcType=VARCHAR},,remark=#{remark,jdbcType=VARCHAR}, WHERE collect_id=#{collectId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC} AND create_time=#{createTime,jdbcType=VARCHAR}]]>
+  	</update>
+    <update id="updateVideoCollectHistoryByExample" parameterType="VideoCollectHistory" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_video_collect_history
+    	]]>
+    	<include refid="VideoCollectHistory_UPDATE" />
+    	<![CDATA[WHERE collect_id=#{collectId,jdbcType=VARCHAR} AND site=#{site,jdbcType=NUMERIC} AND create_time=#{createTime,jdbcType=VARCHAR}]]>
+  	</update>
+  	<update id="updateVideoCollectHistoryByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[
+    		UPDATE t_video_collect_history ${value}
+    	]]>
+  	</update>
+  	<update id="updateVideoCollectHistoryByCondition" parameterType="cn.com.paladintyrion.client.search.VideoCollectHistorySearchBean" flushCache="true">
+    	<![CDATA[UPDATE t_video_collect_history]]>
+    	<include refid="VideoCollectHistory_UPDATE" />
+    	<include refid="VideoCollectHistoryCondition_WHERE" />
+  	</update>
+  	<delete id="deleteVideoCollectHistoryByWhere" parameterType="java.lang.String" flushCache="true">
+    	<![CDATA[DELETE FROM t_video_collect_history ${value}]]>
+  	</delete>
+  	<delete id="deleteVideoCollectHistoryByExample" parameterType="VideoCollectHistory" flushCache="true">
+    	<![CDATA[DELETE FROM t_video_collect_history]]>
+    	<include refid="VideoCollectHistory_WHERE" />
+  	</delete>
+  	<delete id="deleteVideoCollectHistoryByCondition" parameterType="cn.com.paladintyrion.client.search.VideoCollectHistorySearchBean" flushCache="true">
+    	<![CDATA[delete from t_video_collect_history]]>
+    	<include refid="VideoCollectHistorySearchBean_WHERE" />
+  	</delete>
+  	<select id="getVideoCollectHistoryByWhere" parameterType="java.lang.String" resultType="VideoCollectHistory" resultMap="t_video_collect_historyMap">
+    	<![CDATA[SELECT * FROM t_video_collect_history ${value}]]>
+  	</select>
+  	<select id="getVideoCollectHistoryByExample" parameterType="VideoCollectHistory" resultType="VideoCollectHistory" resultMap="t_video_collect_historyMap">  
+        <![CDATA[
+			SELECT * FROM t_video_collect_history
+		]]>
+        <include refid="VideoCollectHistory_WHERE" />
+    </select>
+    <select id="getVideoCollectHistoryByCondition" parameterType="cn.com.paladintyrion.client.search.VideoCollectHistorySearchBean" resultType="VideoCollectHistory" resultMap="t_video_collect_historyMap">
+    	<![CDATA[SELECT * FROM t_video_collect_history]]>
+    	<include refid="VideoCollectHistorySearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getVideoCollectHistoryListByWhere" parameterType="java.lang.String" resultType="VideoCollectHistory" resultMap="t_video_collect_historyMap">
+    	<![CDATA[SELECT * FROM t_video_collect_history ${sql}]]>
+  	</select>
+  	<select id="getVideoCollectHistoryListByCondition" parameterType="cn.com.paladintyrion.client.search.VideoCollectHistorySearchBean" resultType="VideoCollectHistory" resultMap="t_video_collect_historyMap">
+    	<![CDATA[SELECT * FROM t_video_collect_history]]>
+    	<include refid="VideoCollectHistorySearchBean_WHERE" />
+    	<![CDATA[${orderSql}]]>
+  	</select>
+  	<select id="getVideoCollectHistoryCountByWhere" parameterType="java.lang.String" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_collect_history ${value}]]>
+  	</select>
+  	<select id="getVideoCollectHistoryCountByExample" parameterType="VideoCollectHistory" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_collect_history]]>
+    	<include refid="VideoCollectHistory_WHERE" />
+  	</select>
+  	<select id="getVideoCollectHistoryCountByCondition" parameterType="cn.com.paladintyrion.client.search.VideoCollectHistorySearchBean" resultType="int">
+    	<![CDATA[SELECT COUNT(*) FROM t_video_collect_history]]>
+    	<include refid="VideoCollectHistorySearchBean_WHERE" />
+  	</select>
+  	<select id="getVideoCollectHistoryColumnByCondition" parameterType="cn.com.paladintyrion.client.search.VideoCollectHistorySearchBean" resultType="java.util.HashMap">
+    	<![CDATA[SELECT ${columnSql} FROM t_video_collect_history]]>
+    	<include refid="VideoCollectHistorySearchBean_WHERE" />
+    	<![CDATA[${sql}]]>
+ 	</select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+    xmlns:context="http://www.springframework.org/schema/context"  xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="  
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd  
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+	<bean id="taskJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="taskJob" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="taskJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="taskJobDetail" />
+		<property name="startDelay" value="1000" />
+		<property name="repeatInterval" value="1000" />
+		<property name="repeatCount" value="-1" />
+	</bean>
+	
+	<bean id="recordRequestJob" class="cn.com.paladintyrion.client.job.RecordRequestJob">
+		<property name="clientId" value="${socket_clientId}" />
+		<property name="dataDir" value="/data/log/" />
+	</bean>
+	<bean id="recordRequestJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="recordRequestJob" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="recordRequestJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="recordRequestJobDetail" />
+		<property name="startDelay" value="1000" />
+		<property name="repeatInterval" value="1000" />
+		<property name="repeatCount" value="-1" />
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="taskJobTrigger" />
+				<ref bean="recordRequestJobTrigger" />
+			</list>
+		</property>
+	</bean>
+</beans>
